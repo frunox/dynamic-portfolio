@@ -1,0 +1,25 @@
+.contactContainer {
+  background-color: teal;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.container {
+  width: 80%;
+}
+
+h3 {
+  color: white;
+}
+
+/* .email {
+  margin-top: 1.5rem;
+} */
+
+.links {
+  font-size: 1.5em;
+}
+
+.send {
+  color: yellow;
+}

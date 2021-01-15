@@ -1,0 +1,10 @@
+.welcome {
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.devHeader {
+  font-style: italic;
+  position: relative;
+  top: 10px;
+}

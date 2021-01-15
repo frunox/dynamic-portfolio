@@ -1,0 +1,51 @@
+.repoCard {
+  /* width: 600px; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 360px;
+}
+
+/* .card {
+  flex: 0 1 95%;
+} */
+
+.ui.card > .content,
+.ui.cards > .card > .content {
+  flex-grow: 1;
+  border: none;
+  border-top: 1px solid rgba(34, 36, 38, 0.25);
+  background: 0 0;
+  margin: 0;
+  padding: 0.25em 1em;
+  box-shadow: none;
+  font-size: 1em;
+  border-radius: 0;
+}
+
+.ui.card > .extra,
+.ui.cards > .card > .extra {
+  max-width: 100%;
+  min-height: 0 !important;
+  flex-grow: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.25) !important;
+  position: static;
+  background: 0 0;
+  width: auto;
+  margin: 0;
+  padding: 0.5em 1em 0;
+  top: 0;
+  left: 0;
+  color: rgba(0, 0, 0, 0.4);
+  box-shadow: none;
+  transition: color 0.1s ease;
+}
+
+.ui.grid > .row {
+  padding-top: 0rem;
+  margin-bottom: 25px;
+}
+
+.buttons {
+  padding-bottom: 7px;
+}

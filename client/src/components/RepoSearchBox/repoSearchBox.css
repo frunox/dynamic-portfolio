@@ -1,0 +1,15 @@
+.search {
+  position: relative;
+  left: 83px;
+  top: -20px;
+  bottom: -5px;
+}
+
+.searchBox {
+  width: 70%;
+}
+
+.searchbox:hover {
+  background-color: #798094;
+  color: #ffffff;
+}

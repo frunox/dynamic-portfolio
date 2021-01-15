@@ -1,0 +1,21 @@
+/* 
+.cards {
+  background-color: red;
+  color: darkslategrey;
+  border-color: darkgrey;
+  border-style: solid;
+  border-radius: 10px;
+  padding: 10px;  
+}  */
+
+/* .rows {
+  margin-bottom: 15px;
+} */
+
+.cardList {
+  margin-top: -25px;
+}
+
+.columns {
+  margin-bottom: 25px;
+}

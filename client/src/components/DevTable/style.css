@@ -1,0 +1,148 @@
+body {
+  background-color: teal;
+}
+
+.devTable {
+  height: 280px;
+  overflow-y: scroll; /* or auto */
+  width: 90%;
+  margin-left: 5%;
+}
+
+.formBox {
+  border: 1px solid black;
+  margin-top: 5px;
+  font-size: 1.2rem;
+}
+
+.devRow:hover {
+  background-color: lightgray;
+}
+
+.repoForm {
+  padding-bottom: 1%;
+}
+
+.boxTitle {
+  font-size: 1.1rem;
+  margin-left: 5%;
+}
+
+.repoName {
+  font-weight: bold;
+  margin-left: 1%;
+}
+
+.inputGroup {
+  margin-left: 3%;
+}
+
+.flagLabel {
+  line-height: 1.4rem;
+}
+
+.searchLine {
+  margin-left: 5%;
+  margin-bottom: 10%;
+  width: 80%;
+}
+
+/* // MODAL */
+
+.ui.modal {
+  position: relative;
+  height: auto;
+}
+
+.checkbox {
+  margin-top: 5px;
+  color: black;
+}
+
+.inputLabel {
+  font-size: 1.1rem;
+  font-weight: bold;
+  width: 80%;
+  margin-right: 10px;
+}
+
+.ui.modal > .header {
+  padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+}
+
+.ui.modal > .content {
+  line-height: 1;
+  padding: 0.5rem 1.5rem;
+}
+
+.ui.segment {
+  margin: 0.5rem;
+  padding: 0.5em 1em;
+  background-image: none;
+}
+
+.ui.form .fields {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 0;
+}
+
+div.inline.field {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.ui.form {
+  padding-top: 0.2em;
+}
+
+.ui.form .field {
+  margin: 0 0 1em 0.5em;
+}
+
+.ui.form .fields > .field {
+  flex: 0 1 auto;
+  /* padding-left: .5em; */
+  padding-right: 0;
+}
+
+label.inputLabel {
+  width: 250px;
+}
+
+.ui.form .inline.field > input,
+.ui.form .inline.field > select,
+.ui.form .inline.fields .field > input,
+.ui.form .inline.fields .field > select {
+  display: inline-block;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  margin-left: -0.45em;
+  vertical-align: middle;
+  font-size: 0.85em;
+  color: black;
+  border: 1px solid rgba(34, 36, 38, 0.5);
+}
+
+input .urlBox {
+  margin-bottom: 10px;
+}
+
+.ui[class*="right floated"].button,
+.ui[class*="right floated"].buttons {
+  float: right;
+  margin-right: -0.6em;
+  margin-top: 8%;
+  margin-left: -1.4em;
+}
+
+.ui.teal.button,
+.ui.teal.buttons .button {
+  background-color: #00b5ad;
+  color: #fff;
+  text-shadow: none;
+  background-image: none;
+  height: 33px;
+}

@@ -1,0 +1,21 @@
+/* body {
+  background-color: white;
+} */
+
+.home {
+  max-width: 100%;
+  position: relative;
+  top: 55px;
+}
+
+/* .lower {
+  background-color: teal;
+} */
+
+.searchRow {
+  background-color: teal;
+}
+
+.cards {
+  padding-top: 15px;
+}
