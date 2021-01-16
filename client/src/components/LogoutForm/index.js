@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-// import { Redirect } from 'react-router'
 import API from "../../utils/API";
 import './style.css';
 
 // console.log('in LoginForm')
 
-// handleInputChange is a prop from page Signin.js
 const LogoutForm = () => {
-    // const { devData } = useContext(DevDataContext);
-    // const { setup } = useContext(SetupContext);
     const [state, setState] = useState({
         loggedIn: null,
         clearUser: false
     });
 
     console.log('LogoutForm, LS/state=login: ', localStorage.getItem("jtsy-login"), state.loggedin)
-    // handleInputChange is a prop from page Signin.js
     const logout = () => {
         // console.log('Logout logout');
         localStorage.setItem("jtsy-login", "false");

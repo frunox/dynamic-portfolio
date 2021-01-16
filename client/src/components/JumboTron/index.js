@@ -3,7 +3,7 @@ import { Segment, Container } from "semantic-ui-react";
 import DevDataContext from "../../contexts/DevDataContext";
 import './style.css'
 
-export const Jumbotron = (props) => {
+export const Jumbotron = () => {
   const { devData } = useContext(DevDataContext);
   console.log('jumbotron: ', devData.fname, devData.lname)
   return (

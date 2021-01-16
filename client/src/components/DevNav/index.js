@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import "./style.css";
 
-const DevNav = props => {
+const DevNav = () => {
 
   let content = (
     <div>

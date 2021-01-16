@@ -128,17 +128,7 @@ const CreateAccountComp = (props) => {
             />
           </div>
           {/* resume */}
-          {/* portfolio */}
-          {/* <div className="portfolioLink">
-            <label htmlFor="portfolioLink">Portfolio Link</label>
-            <input
-              placeholder="portfolio link"
-              type="text"
-              name="portfolioLink"
-              onChange={handleChange}
-            />
-          </div> */}
-          {/* portfolio */}
+          {/* password*/}
           <div className="password">
             <label htmlFor="password">Password*</label>
             <input

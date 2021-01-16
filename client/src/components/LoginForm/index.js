@@ -5,9 +5,7 @@ import md5 from 'blueimp-md5';
 console.log('in LoginForm')
 
 // handleInputChange is a prop from page Signin.js
-const LoginForm = (props) => {
-    // const { devData } = useContext(DevDataContext);
-    // const { setup } = useContext(SetupContext);
+const LoginForm = () => {
     const [state, setState] = useState({
         githubID: "",
         password: "",
@@ -15,7 +13,6 @@ const LoginForm = (props) => {
     });
 
     // console.log('in LoginForm, LSlogin: ', localStorage.getItem("jtsy-login"))
-    // handleInputChange is a prop from page Signin.js
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.log("HMMMM leaving CreateAccountcomp");

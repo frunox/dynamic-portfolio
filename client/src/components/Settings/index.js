@@ -5,7 +5,6 @@ import DevDataContext from "../../contexts/DevDataContext";
 
 console.log('in Settings')
 
-// handleInputChange is a prop from page Signin.js
 const SettingsComp = () => {
     console.log('in SettingsComp')
     const { devData } = useContext(DevDataContext);
@@ -21,12 +20,9 @@ const SettingsComp = () => {
         redirect: false
     });
 
-
-    // handleInputChange is a prop from page Signin.js
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("in Settings handleSubmit", devData.developerGithubID);
-        // props.handleInputChange();
         const revDevData = {
             developerLoginName: devData.developerLoginName,
             developerGithubID: devData.developerGithubID,

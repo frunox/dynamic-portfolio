@@ -97,9 +97,10 @@ const App = () => {
                   <Route exact path="/logout" component={Logout} />
                   <Route exact path="/signin" component={Signin} />
                   <Route exact path="/settings" component={Settings} />
+                  <Route exact path="*" component={NoMatch} />
                 </SetupContext.Provider>
               </DevDataContext.Provider>
-              <Route component={NoMatch} />
+              {/* <Route component={NoMatch} /> */}
             </Switch>
           </Router>
         </React.Fragment>

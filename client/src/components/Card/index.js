@@ -3,17 +3,6 @@ import { Button, Card, Image } from 'semantic-ui-react'
 import './cardStyle.css'
 
 const ProjectCard = props => {
-  // console.log('ProjectCard dep link', props.repo.deploymentLink)
-  // let deploymentLink = "";
-  // if (props.repo.deploymentLink) {
-  //   deploymentLink = (
-  //     <Card.Link href={props.repo.deploymentLink} target={"_blank"}>
-  //       Deployment Link
-  //     </Card.Link>
-  //   );
-  // } else {
-  //   deploymentLink = "";
-  // }
   return (
     <Card.Group className="repoCard" stackable centered>
       <Card className="card" raised>

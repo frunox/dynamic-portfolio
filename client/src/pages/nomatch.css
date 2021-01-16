@@ -1,0 +1,10 @@
+/* body {
+  background-color: teal;
+} */
+
+.home {
+  max-width: 100%;
+  position: relative;
+  top: 100px;
+  font-weight: bold;
+}

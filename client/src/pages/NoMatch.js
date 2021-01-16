@@ -3,11 +3,14 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
 import HomeNav from "../components/HomeNav";
+import "./nomatch.css";
+
 
 // this function returns the JSX elements to be rendered
 function NoMatch() {
+  console.log('in NoMatch')
   return (
-    <div>
+    <div className='home'>
       <HomeNav />
       <Container fluid>
         <h1 className="text-center">404 Page Not Found</h1>

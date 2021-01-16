@@ -5,17 +5,11 @@ import HomeNav from "../components/HomeNav";
 
 function Login() {
     console.log('in /pages/Login.js')
-    // const { devData, setDevData } = useContext(DevDataContext);
-
-    // handleInputChange is passed to Settings component
-    const handleInputChange = (e) => {
-        console.log('Login handleInputChange')
-    };
 
     return (
         <div>
             <HomeNav />
-            <LoginForm handleInputChange={handleInputChange}></LoginForm>
+            <LoginForm></LoginForm>
         </div>
     );
 
