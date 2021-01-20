@@ -2,7 +2,6 @@ import React from "react";
 
 //  Track if the developer is loaded and set up initialized
 const SetupContext = React.createContext({
-    isLoaded: false,
     initialized: false,
     loggedIn: false
 });

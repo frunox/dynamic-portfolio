@@ -2,6 +2,11 @@ import React, { useState, useContext } from "react";
 import md5 from 'blueimp-md5';
 import API from "../../utils/API";
 import DevDataContext from "../../contexts/DevDataContext"
+// import { Redirect } from "react-router-dom";
+
+// const emailRegex = RegExp(
+//   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+// );
 
 console.log('in CreateAccountcomp')
 
@@ -50,6 +55,7 @@ const CreateAccountComp = (props) => {
       ...state,
       loaded: true
     })
+    console.log('CAC state.devGithubID', state.developerGithubID)
     devData.developerGithubID = state.developerGithubID;
   };
 
@@ -128,7 +134,17 @@ const CreateAccountComp = (props) => {
             />
           </div>
           {/* resume */}
-          {/* password*/}
+          {/* portfolio */}
+          {/* <div className="portfolioLink">
+            <label htmlFor="portfolioLink">Portfolio Link</label>
+            <input
+              placeholder="portfolio link"
+              type="text"
+              name="portfolioLink"
+              onChange={handleChange}
+            />
+          </div> */}
+          {/* portfolio */}
           <div className="password">
             <label htmlFor="password">Password*</label>
             <input

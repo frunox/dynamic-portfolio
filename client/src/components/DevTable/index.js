@@ -28,7 +28,7 @@ const DevTable = () => {
   })
 
   useEffect(() => {
-    console.log('DevTable 1.  in useEffect')
+    // console.log('DevTable 1.  in useEffect')
     API.getActiveDeveloper()
       .then(res => {
         // console.log('DevTable 2. ')
@@ -107,7 +107,7 @@ const DevTable = () => {
   };
 
   const updateFlag = (id) => {
-    console.log('change Flag clicked', id, tableData[id].activeFlag)
+    // console.log('change Flag clicked', id, tableData[id].activeFlag)
     if (tableData[id].activeFlag === 'false') {
       tableData[id].activeFlag = 'true';
     } else {
@@ -167,8 +167,8 @@ const DevTable = () => {
         </span>
       </Container>
       <div className="devTable">
-        <Table sortable celled fixed singleLine>
-          <Table.Header>
+        <Table sortable celled fixed inverted singleLine>
+          <Table.Header inverted>
             <Table.Row className="sticky">
               <Table.HeaderCell
                 width={3}
@@ -247,9 +247,9 @@ const DevTable = () => {
                   </Form.Group>
                   <Form.Group>
                     <Form.Field inline>
-                      <div>Add Topics:</div>
+                      <div>Add Keywords:</div>
                       <label className="inputLabel">{state.keywords}</label>
-                      <input className="urlBox" name="keywords" label='Keywords: ' placeholder="topics..." value={state.value} onChange={(event) => handleLinkChange(event)} />
+                      <input className="urlBox" name="keywords" label='Keywords: ' placeholder="keywords..." value={state.value} onChange={(event) => handleLinkChange(event)} />
                     </Form.Field>
                   </Form.Group>
                   <Button color="teal" fluid active

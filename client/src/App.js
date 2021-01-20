@@ -36,6 +36,8 @@ const App = () => {
     loggedIn: false,
   });
   const setupProvider = useMemo(() => ({ setup, setSetup }), [setup, setSetup]);
+  // console.log('App.js setup.initialized ', setup.initialized, setup.isLoaded)
+  // console.log("App.js setup.loggedIn: ", setup.loggedIn)
 
   // On load find active user
   useEffect(() => {
@@ -70,7 +72,7 @@ const App = () => {
     });
     // console.log('App.js SetupContext ', SetupContext._currentValue)
     // console.log("App.js end initial load", setup.initialized);
-  }, [setup.loggedIn]);
+  }, []);
   // console.log('SetupContext: ', SetupContext._currentValue);
   // console.log("setup.initialized", setup.initialized);
   // console.log("setup.isLoaded", setup.isLoaded);
@@ -97,10 +99,9 @@ const App = () => {
                   <Route exact path="/logout" component={Logout} />
                   <Route exact path="/signin" component={Signin} />
                   <Route exact path="/settings" component={Settings} />
-                  <Route exact path="*" component={NoMatch} />
                 </SetupContext.Provider>
               </DevDataContext.Provider>
-              {/* <Route component={NoMatch} /> */}
+              <Route component={NoMatch} />
             </Switch>
           </Router>
         </React.Fragment>

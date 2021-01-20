@@ -11,7 +11,7 @@ const developerSchema = new Schema({
   },
   developerGithubID: {
     type: String,
-    required: true,
+    required: false,
   },
   repositories: [
     {

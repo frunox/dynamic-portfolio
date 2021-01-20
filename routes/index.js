@@ -10,6 +10,7 @@ console.log('3. in routes/index.js', path.join(__dirname, "../client/public/inde
 router.use("/api", apiRoutes);
 
 // Call utils routes.  The only currently here is the "synch" (to synch github with your database)
+console.log('in routes/index.js, /util')
 router.use("/util", utilRoutes);
 
 // If no API routes are hit, send the React app (landing page)

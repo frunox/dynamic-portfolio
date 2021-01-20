@@ -10,6 +10,7 @@ function SignIn() {
   const { setup, setSetup } = useContext(SetupContext);
   // console.log('loggedIn: ', setup.loggedIn)
   // console.log('in Signin.js setup.initialized: ', setup.initialized)
+  console.log('in Signin.js setup.isLoaded: ', setup.isLoaded)
 
   console.log('Signin SetupContext ', SetupContext._currentValue.setup)
 
