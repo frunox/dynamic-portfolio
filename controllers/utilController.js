@@ -46,7 +46,7 @@ async function updateDevDB(developerLoginName) {
     })
     // Take the devData (the existing data in db.developers) and gitHubData and call loadDB to synch Databases.
     .then((devData) => {
-      console.log('calling loadDB devData: ', devData.developerGithubID)
+      // console.log('calling loadDB devData: ', devData.developerGithubID)
       loadDB(developerLoginName, devData, gitHubData.data);
     })
     .catch((err) => console.log(err));

@@ -8,7 +8,6 @@ console.log('in Settings')
 const SettingsComp = () => {
     console.log('in SettingsComp')
     const { devData } = useContext(DevDataContext);
-    console.log('in Settings devGithubId: ', devData.developerGithubId)
     const [state, setState] = useState({
         developerLoginName: devData.developerLoginName,
         developerGithubID: devData.developerGithubID,
