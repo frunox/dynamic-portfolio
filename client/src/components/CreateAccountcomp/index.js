@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import md5 from 'blueimp-md5';
 import API from "../../utils/API";
-import DevDataContext from "../../contexts/DevDataContext"
-import SetupContext from "../../contexts/SetupContext"
+import DevDataContext, { DevDataProvider } from "../../contexts/DevDataContext"
+import SetupContext, { SetupProvider } from "../../contexts/SetupContext"
 // import { Redirect } from "react-router-dom";
 
 // const emailRegex = RegExp(
@@ -13,17 +13,22 @@ console.log('in CreateAccountcomp')
 
 // handleInputChange is a prop from page Signin.js
 const CreateAccountComp = (props) => {
-  const [devData, setDevData] = useState({
-    developerLoginName: "",
-    developerGithubID: "",
-    repositories: [],
-    fname: "",
-    lname: "",
-    email: "",
-    linkedInLink: "",
-    resumeLink: "",
-    active: true,
-  });
+  const setupCtx = useContext(SetupContext);
+  const devDataCtx = useContext(DevDataContext);
+
+  console.log('CAC setupCtx', setupCtx);
+  console.log('CAC devDataCtx', devDataCtx);
+  // const [devData, setDevData] = useState({
+  //   developerLoginName: "",
+  //   developerGithubID: "",
+  //   repositories: [],
+  //   fname: "",
+  //   lname: "",
+  //   email: "",
+  //   linkedInLink: "",
+  //   resumeLink: "",
+  //   active: true,
+  // });
   const [state, setState] = useState({
     firstName: null,
     lastName: null,
@@ -78,9 +83,10 @@ const CreateAccountComp = (props) => {
       resumeLink: state.resumeLink,
       active: true
     }
-    console.log('in createAcctComp: call updateDeveloper', developerData)
+    console.log('in createAcctComp: call updateDeveloper', developerData);
+    devDataCtx.updateDev(developerData);
     API.updateDeveloper(developerData);
-
+    console.log('CAC devDataCtx', devDataCtx)
   };
 
   const handleChange = (e) => {

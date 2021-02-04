@@ -10,7 +10,7 @@ function SignIn() {
   // console.log('in Signin.js setup.initialized: ', setup.initialized)
 
 
-  console.log(localStorage.getItem("jtsy-signin"))
+  console.log('Signin LS signed in?', localStorage.getItem("jtsy-signin"))
 
   if (localStorage.getItem("jtsy-signin") === "true") {
     console.log('in Signin.js, redirect to Home page')

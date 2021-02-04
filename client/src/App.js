@@ -11,72 +11,66 @@ import Signin from "./pages/Signin/Signin";
 import Settings from "./pages/Settings/Settings";
 import DevDataContext from "./contexts/DevDataContext";
 import SetupContext from "./contexts/SetupContext";
+import CreateAccountComp from "./components/CreateAccountcomp";
 
 // devData - This is in the format of how we are reading the database.
 // state is set after call to db for active developer info and repos to display
 const App = () => {
 
-  const { devData, setDevData } = useContext(DevDataContext);
-  console.log('devData check', devData, typeof devData)
-  const devDataProvider = useMemo(() => ({ devData, setDevData }), [
-    devData,
-    setDevData,
-  ]);
-
+  // const { devData, setDevData } = useContext(DevDataContext);
+  // console.log('devData check', devData, typeof devData)
+  // const devDataProvider = useMemo(() => ({ devData, setDevData }), [
+  //   devData,
+  //   setDevData,
+  // ]);
+  const setupCtx = useContext(SetupContext);
+  console.log('APP init setupCtx', setupCtx)
   // setup - This tracks our initialization process.
-  const [setup, setSetup] = useState({
-    isLoaded: false,
-    initialized: false,
-    loggedIn: false
-  });
-  const setupProvider = useMemo(() => ({ setup, setSetup }), [setup, setSetup]);
+  // const [setup, setSetup] = useState({
+  //   isLoaded: false,
+  //   initialized: false,
+  //   loggedIn: false
+  // });
+  // const setupProvider = useMemo(() => ({ setup, setSetup }), [setup, setSetup]);
   // console.log('App.js setup.initialized ', setup.initialized, setup.isLoaded)
   // console.log("App.js setup.loggedIn: ", setup.loggedIn)
-  console.log('APP setup values', setup.isLoaded, setup.initialized, setup.loggedIn)
+  console.log('APP setup isLoaded', JSON.stringify(setupCtx.state.isLoaded))
   // On load find active user
-  if (!setup.isLoaded) {
-    setSetup({
-      ...setup,
-      isLoaded: true,
-    })
-    console.log('APP isloaded', setup.isLoaded, 'to Signin/CAC')
+  if (!setupCtx.isLoaded) {
+    console.log('APP isloaded', JSON.stringify(setupCtx.state.isLoaded), 'to Signin/CAC')
     return (
-      <Signin />
+      <CreateAccountComp />
     )
   } else {
-    // setSetup({
-    //   ...setup,
-    //   initialized: true
-    // })
+    console.log('APP isLoaded',)
+    return (
+      <Home />
+    )
   }
   return (
     <div>
-      (
+
       <React.Fragment>
         <Router>
           <Switch>
-            <DevDataContext.Provider value={devDataProvider}>
-              <SetupContext.Provider value={setupProvider}>
-                {setup.initialized ? (
-                  <Route exact path="/" component={Home} />
-                ) : (
-                    <Route exact path="/" component={Signin} />
-                  )}
-                <Route exact path="/contact" component={Contact} />
-                <Route exact path="/about" component={About} />
-                <Route exact path="/developer" component={Developer} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/logout" component={Logout} />
-                <Route exact path="/signin" component={Signin} />
-                <Route exact path="/settings" component={Settings} />
-              </SetupContext.Provider>
-            </DevDataContext.Provider>
+            {setupCtx.initialized ? (
+              <Route exact path="/" component={Home} />
+            ) : (
+                <Route exact path="/" component={CreateAccountComp} />
+              )}
+            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/developer" component={Developer} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/logout" component={Logout} />
+            <Route exact path="/signin" component={Signin} />
+            <Route exact path="/settings" component={Settings} />
             <Route component={NoMatch} />
           </Switch>
         </Router>
       </React.Fragment>
-      )
-    </div>
+
+    </div >
   );
 };
 

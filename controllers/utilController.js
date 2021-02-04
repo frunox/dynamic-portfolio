@@ -77,7 +77,7 @@ function loadDB(developerLoginName, devData, gitHubData) {
       // const devID = developerGithubID
       // console.log('devID:  ', devData.developerGithubID)
       githubRepoArray.push(repo.id);
-      // console.log('13c. call updateRepo')
+      console.log('13c. call updateRepo')
       updateRepo(repo, developerGithubID);
     });
     // console.log('githubRepoArray: ', githubRepoArray)
@@ -131,7 +131,7 @@ function archiveRepositories(devData, githubRepoArray) {
 }
 //  This will synch the two databases.
 async function updateRepo(repo, devID) {
-  // console.log('14. in updateRepo: ', devID)
+  console.log('14. in updateRepo: ', devID)
   // repo is each repo, devID is the user's github id
   // Set the repo.description to the repo name if it is null (This is a required field)
   if (!repo.description) {
