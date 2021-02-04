@@ -28,11 +28,14 @@ const App = () => {
   if (localStorage.getItem("jtsy-signin") === "true") {
     initialized = true;
   }
+
   // If user is active, update devDataContext and set initialized = true
   useEffect(() => {
     if (initialized) {
       console.log('signin=true, redirect to Home page');
-
+      if (localStorage.getItem('jtsy-login') === 'true') {
+        setupCtx.updateLoggedIn();
+      }
       API.getActiveDevData().then((activeDevData) => {
         console.log('APP activeDevData', activeDevData);
 
@@ -101,6 +104,7 @@ const App = () => {
             <Route exact path="/developer" component={Developer} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/logout" component={Logout} />
+            <Route exact path="/signin" component={CreateAccountComp} />
             <Route exact path="/settings" component={Settings} />
             <Route component={NoMatch} />
           </Switch>

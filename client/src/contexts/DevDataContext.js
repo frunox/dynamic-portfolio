@@ -39,6 +39,22 @@ export const DevDataProvider = props => {
                         resumeLink: devData.resumeLink,
                         repositories: devData.repositories
                     })
+                },
+                resetDev: () => {
+                    console.log('devCtx resetDev')
+                    setState({
+                        developerLoginName: "",
+                        developerGithubID: "",
+                        lname: "",
+                        fname: "",
+                        email: "",
+                        linkedInLink: "",
+                        resumeLink: "",
+                        active: true,
+                        repositories: [],
+                        displayRepos: [],
+                        filteredRepos: [],
+                    });
                 }
             }
         } >

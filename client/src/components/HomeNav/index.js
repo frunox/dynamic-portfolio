@@ -4,13 +4,13 @@ import SetupContext from "../../contexts/SetupContext";
 import { Menu } from 'semantic-ui-react';
 import "./style.css";
 
-let loggedIn = false;
-
 const HomeNav = () => {
   const devCtx = useContext(DevDataContext);
   const setupCtx = useContext(SetupContext);
   console.log('HOMENAV some devData: ', devCtx.state.fname)
-  console.log('HOMENAV setupCtx', setupCtx)
+  console.log('HOMENAV setupCtx', setupCtx);
+
+  let loggedIn = false;
   if (localStorage.getItem("jtsy-login") === "true") {
     loggedIn = true
   }
@@ -29,7 +29,7 @@ const HomeNav = () => {
           <Menu.Item as="a" href="/contact" name="contact">
           </Menu.Item>
 
-          {setupCtx.state.loggedIn ? (
+          {loggedIn ? (
             <Menu.Item as="a" href="/developer" name="developer">
             </Menu.Item>
           ) : (
