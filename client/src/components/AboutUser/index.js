@@ -4,14 +4,14 @@ import { Grid, Image, Container } from 'semantic-ui-react'
 import './style.css'
 
 function AboutUser() {
-    const { devData } = useContext(DevDataContext);
+    const devCtx = useContext(DevDataContext);
     return (
         <Fragment>
             <Container className="grid">
                 <Grid>
                     <Grid.Row>
                         <Grid.Column width={8}>
-                            <h3>About {devData.fname} {devData.lname}</h3>
+                            <h3>About {devCtx.state.fname} {devCtx.state.lname}</h3>
                             <p>
                                 A web developer with the following skills:
                             </p>
@@ -23,7 +23,7 @@ function AboutUser() {
                                 in Java and Semantic-UI.
                             </p>
                             <p>See my:</p>
-                            <p><a className="links" href={devData.resumeLink} rel="noopener noreferrer" target="_blank">Resume</a></p>
+                            <p><a className="links" href={devCtx.state.resumeLink} rel="noopener noreferrer" target="_blank">Resume</a></p>
                             {/* <p><a className="links" href={devData.portfolioLink} rel="noopener noreferrer" target="_blank">Portfolio</a></p> */}
                         </Grid.Column>
                         <Grid.Column width={8}>

@@ -30,7 +30,7 @@ const App = () => {
   }
   // If user is active, update devDataContext and set initialized = true
   useEffect(() => {
-    if (localStorage.getItem("jtsy-signin") === "true") {
+    if (initialized) {
       console.log('signin=true, redirect to Home page');
 
       API.getActiveDevData().then((activeDevData) => {
@@ -54,10 +54,6 @@ const App = () => {
 
       })
     };
-    return (
-      <div>
-        <Home />
-      </div>)
   }, [])
 
   console.log('APP initialized', initialized)

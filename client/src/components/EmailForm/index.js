@@ -4,10 +4,10 @@ import DevDataContext from "../../contexts/DevDataContext";
 // import "./emailform.css"
 
 const EmailForm = () => {
-    const { devData } = useContext(DevDataContext);
-    console.log('in emailForm, email: ', devData.email);
+    const devCtx = useContext(DevDataContext);
+    console.log('in emailForm, email: ', devCtx.state.email);
     return (
-        <Form className="formBody" action={"mailto: " + devData.email} method="GET" target="_blank">
+        <Form className="formBody" action={"mailto: " + devCtx.state.email} method="GET" target="_blank">
             <Grid className="formBody" columns="1">
                 <Grid.Column width="6">
                     <Form.Field inline className='field'>
