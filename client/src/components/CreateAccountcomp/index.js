@@ -3,32 +3,15 @@ import md5 from 'blueimp-md5';
 import API from "../../utils/API";
 import DevDataContext, { DevDataProvider } from "../../contexts/DevDataContext"
 import SetupContext, { SetupProvider } from "../../contexts/SetupContext"
-// import { Redirect } from "react-router-dom";
-
-// const emailRegex = RegExp(
-//   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-// );
 
 console.log('in CreateAccountcomp')
 
-// handleInputChange is a prop from page Signin.js
 const CreateAccountComp = (props) => {
   const setupCtx = useContext(SetupContext);
   const devDataCtx = useContext(DevDataContext);
 
   console.log('CAC setupCtx', setupCtx);
   console.log('CAC devDataCtx', devDataCtx);
-  // const [devData, setDevData] = useState({
-  //   developerLoginName: "",
-  //   developerGithubID: "",
-  //   repositories: [],
-  //   fname: "",
-  //   lname: "",
-  //   email: "",
-  //   linkedInLink: "",
-  //   resumeLink: "",
-  //   active: true,
-  // });
   const [state, setState] = useState({
     firstName: null,
     lastName: null,
@@ -42,23 +25,13 @@ const CreateAccountComp = (props) => {
   });
 
   console.log("1. CAC get dev");
-  // activeDevData is current user info + repos w/activeFlag = true
-  // go to utils/API to call
-
-  // console.log('after setting state and rendering, call getsync', activeDevData.data.developerLoginName)
-  // API.getsync();
-
-  // console.log('7a. after setting state and rendering, call getsync', github)
-
-
-  // console.log('App.js SetupContext ', SetupContext._currentValue)
-  // console.log("App.js end initial load", setup.initialized);
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("CAC data entered");
     // props.handleInputChange();
+    setupCtx.updateIsLoaded();
     let hash = md5(state.password);
     // console.log('CreateAccountcomp call getsync()', state.password, hash);
     localStorage.setItem('jtsy-password', hash);

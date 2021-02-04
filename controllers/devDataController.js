@@ -36,7 +36,7 @@ module.exports = {
             );
           }
           // now we have the repos with activeFlag = true
-          // console.log('dbDeveloper in devDataController ', dbDeveloper.developerLoginName)
+          console.log('dbDeveloper in devDataController ', dbDeveloper.developerGithubID)
           return res.json(dbDeveloper);
         }
       });

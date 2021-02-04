@@ -6,16 +6,16 @@ import HomeNav from "../components/HomeNav";
 import "./home.css";
 
 function Home() {
-  const { devData } = useContext(DevDataContext);
-  console.log('HOME start devData', devData);
+  const devCtx = useContext(DevDataContext);
+  console.log('HOME start devCtx', devCtx);
   const [displayRepos, setdisplayRepos] = useState({
-    displayRepos: devData.repositories,
+    displayRepos: devCtx.repositories,
   });
   return (
     <div className='home'>
       <HomeNav />
       <Jumbotron />
-      <PortCards className="cards" repositories={displayRepos.displayRepos}></PortCards>
+      <PortCards className="cards"></PortCards>
     </div>
   );
 }

@@ -1,20 +1,23 @@
 import React, { useContext } from 'react';
 import DevDataContext from "../../contexts/DevDataContext";
+import SetupContext from "../../contexts/SetupContext";
 import { Menu } from 'semantic-ui-react';
 import "./style.css";
 
 let loggedIn = false;
 
 const HomeNav = () => {
-  const { devData } = useContext(DevDataContext);
-  console.log('some devData: ', devData.fname)
+  const devCtx = useContext(DevDataContext);
+  const setupCtx = useContext(SetupContext);
+  console.log('HOMENAV some devData: ', devCtx.state.fname)
+  console.log('HOMENAV setupCtx', setupCtx)
   if (localStorage.getItem("jtsy-login") === "true") {
     loggedIn = true
   }
   let content = (
     <div>
       <Menu inverted stackable fixed="top" className="menu">
-        <Menu.Item header className="logo">{devData.fname} {devData.lname}</Menu.Item>
+        <Menu.Item header className="logo">{devCtx.state.fname} {devCtx.state.lname}</Menu.Item>
         <Menu.Menu position="left">
           <Menu.Item as="a" href="/" name="home">
           </Menu.Item>
@@ -26,7 +29,7 @@ const HomeNav = () => {
           <Menu.Item as="a" href="/contact" name="contact">
           </Menu.Item>
 
-          {loggedIn ? (
+          {setupCtx.state.loggedIn ? (
             <Menu.Item as="a" href="/developer" name="developer">
             </Menu.Item>
           ) : (

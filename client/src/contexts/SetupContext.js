@@ -21,7 +21,7 @@ export const SetupProvider = (props) => {
                     !state.initialized ? setState({ ...state, initialized: true }) : setState({ ...state, initialized: false });
                 },
                 updateLoggedIn: () => {
-                    !state.loggedIn ? setState({ loggedIn: true }) : setState({ loggedIn: false });
+                    !state.loggedIn ? setState({ ...state, loggedIn: true }) : setState({ ...state, loggedIn: false });
                 }
             }
         }>

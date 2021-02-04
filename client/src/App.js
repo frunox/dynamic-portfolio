@@ -1,5 +1,6 @@
-import React, { useState, useMemo, useContext } from "react";
+import React, { useState, useMemo, useContext, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import API from './utils/API';
 import Developer from "./pages/Developer";
 import NoMatch from "./pages/NoMatch";
 import About from "./pages/About";
@@ -7,7 +8,6 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
-import Signin from "./pages/Signin/Signin";
 import Settings from "./pages/Settings/Settings";
 import DevDataContext from "./contexts/DevDataContext";
 import SetupContext from "./contexts/SetupContext";
@@ -16,44 +16,86 @@ import CreateAccountComp from "./components/CreateAccountcomp";
 // devData - This is in the format of how we are reading the database.
 // state is set after call to db for active developer info and repos to display
 const App = () => {
-
-  // const { devData, setDevData } = useContext(DevDataContext);
-  // console.log('devData check', devData, typeof devData)
-  // const devDataProvider = useMemo(() => ({ devData, setDevData }), [
-  //   devData,
-  //   setDevData,
-  // ]);
   const setupCtx = useContext(SetupContext);
   console.log('APP init setupCtx', setupCtx)
-  // setup - This tracks our initialization process.
-  // const [setup, setSetup] = useState({
-  //   isLoaded: false,
-  //   initialized: false,
-  //   loggedIn: false
-  // });
-  // const setupProvider = useMemo(() => ({ setup, setSetup }), [setup, setSetup]);
-  // console.log('App.js setup.initialized ', setup.initialized, setup.isLoaded)
-  // console.log("App.js setup.loggedIn: ", setup.loggedIn)
   console.log('APP setup isLoaded', JSON.stringify(setupCtx.state.isLoaded))
-  // On load find active user
-  if (!setupCtx.isLoaded) {
-    console.log('APP isloaded', JSON.stringify(setupCtx.state.isLoaded), 'to Signin/CAC')
-    return (
-      <CreateAccountComp />
-    )
-  } else {
-    console.log('APP isLoaded',)
-    return (
-      <Home />
-    )
+
+  const devCtx = useContext(DevDataContext);
+  console.log('APP devCtx', devCtx)
+
+  // variable to control routing
+  let initialized = false;
+  if (localStorage.getItem("jtsy-signin") === "true") {
+    initialized = true;
   }
+  // If user is active, update devDataContext and set initialized = true
+  useEffect(() => {
+    if (localStorage.getItem("jtsy-signin") === "true") {
+      console.log('signin=true, redirect to Home page');
+
+      API.getActiveDevData().then((activeDevData) => {
+        console.log('APP activeDevData', activeDevData);
+
+        const developerData = {
+          developerLoginName: activeDevData.data.developerLoginName,
+          developerGithubID: activeDevData.data.developerGithubID,
+          repositories: [],
+          fname: activeDevData.data.fname,
+          lname: activeDevData.data.lname,
+          email: activeDevData.data.email,
+          linkedInLink: activeDevData.data.linkedInLink,
+          resumeLink: activeDevData.data.resumeLink,
+          active: true
+        }
+        console.log('APP after DB call', developerData)
+        // update dev context with current user
+        devCtx.updateDev(developerData)
+        setupCtx.updateInitialized();
+
+      })
+    };
+    return (
+      <div>
+        <Home />
+      </div>)
+  }, [])
+
+  console.log('APP initialized', initialized)
+  // if (localStorage.getItem("jtsy-signin") === "true") {
+  //   console.log('signin=true, redirect to Home page')
+  //   return (
+  //     <div>
+  //       <Home />
+  //     </div>)
+  // } else {
+  //   console.log('No dev/ to CAC')
+  //   return (
+  //     <div>
+  //       <CreateAccountComp />
+  //     </div>
+  //   );
+  // }
+
+
+  // if (!setupCtx.isLoaded) {
+  //   console.log('APP isloaded', JSON.stringify(setupCtx.state.isLoaded), 'to Signin/CAC')
+  //   return (
+  //     <CreateAccountComp />
+  //   )
+  // } else {
+  //   console.log('APP isLoaded',)
+  //   return (
+  //     <Home />
+  //   )
+  // }
+
   return (
     <div>
 
       <React.Fragment>
         <Router>
           <Switch>
-            {setupCtx.initialized ? (
+            {initialized ? (
               <Route exact path="/" component={Home} />
             ) : (
                 <Route exact path="/" component={CreateAccountComp} />
@@ -63,7 +105,6 @@ const App = () => {
             <Route exact path="/developer" component={Developer} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/logout" component={Logout} />
-            <Route exact path="/signin" component={Signin} />
             <Route exact path="/settings" component={Settings} />
             <Route component={NoMatch} />
           </Switch>
