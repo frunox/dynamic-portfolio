@@ -9,13 +9,15 @@ function PortCards() {
   return (
     <Grid container stackable>
       <Grid.Row centered className="rows">
-        {devCtx.state.repositories.map((repo, index) => (
+        {devCtx.state.repositories
+          .filter(repo => repo.activeFlag === 'true')
+          .map((repo, index) => (
 
-          <Grid.Column key={index} computer={5} table={8} className="columns">
-            <ProjectCard fluid repo={repo} />
-          </Grid.Column>
+            <Grid.Column key={index} computer={5} table={8} className="columns">
+              <ProjectCard fluid repo={repo} />
+            </Grid.Column>
 
-        ))}
+          ))}
       </Grid.Row>
     </Grid>
   );

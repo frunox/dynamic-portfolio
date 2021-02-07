@@ -32,7 +32,7 @@ const App = () => {
   // If user is active, update devDataContext and set initialized = true
   useEffect(() => {
     if (initialized) {
-      console.log('signin=true, redirect to Home page');
+      console.log('APP useEffect signin=true, redirect to Home page');
       if (localStorage.getItem('jtsy-login') === 'true') {
         setupCtx.updateLoggedIn();
       }
@@ -42,7 +42,8 @@ const App = () => {
         const developerData = {
           developerLoginName: activeDevData.data.developerLoginName,
           developerGithubID: activeDevData.data.developerGithubID,
-          repositories: [],
+          repositories: activeDevData.data.repositories,
+          displayRepos: activeDevData.data.displayRepos,
           fname: activeDevData.data.fname,
           lname: activeDevData.data.lname,
           email: activeDevData.data.email,

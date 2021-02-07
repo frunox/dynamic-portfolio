@@ -28,6 +28,7 @@ export const DevDataProvider = props => {
             {
                 state: state,
                 updateDev: (devData) => {
+                    console.log('DEVDATACONTEXT updateDev devData', devData)
                     setState({
                         ...state,
                         developerLoginName: devData.developerLoginName,
@@ -37,7 +38,8 @@ export const DevDataProvider = props => {
                         email: devData.email,
                         linkedInLink: devData.linkedInLink,
                         resumeLink: devData.resumeLink,
-                        repositories: devData.repositories
+                        repositories: devData.repositories,
+                        displayRepos: devData.displayRepos
                     })
                 },
                 resetDev: () => {
