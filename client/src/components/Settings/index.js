@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from 'react-router'
 import API from "../../utils/API";
 import DevDataContext from "../../contexts/DevDataContext";
@@ -6,25 +6,37 @@ import DevDataContext from "../../contexts/DevDataContext";
 console.log('in Settings')
 
 const SettingsComp = () => {
-    const { devData } = useContext(DevDataContext);
-    console.log('in SettingsComp devData', devData)
-    const [state, setState] = useState({
-        developerLoginName: devData.developerLoginName,
-        developerGithubID: devData.developerGithubID,
-        firstName: devData.fname,
-        lastName: devData.lname,
-        email: devData.email,
-        linkedInLink: devData.linkedInLink,
-        resumeLink: devData.resumeLink,
+    const devCtx = useContext(DevDataContext);
+    console.log("SETTINGS devCtx", devCtx.state, typeof devCtx.state)
+
+    // let testName = devCtx.state.fname
+    // console.log('testName', testName, typeof testName)
+
+    const [state, setState] = useState({})
+
+    let settings = {
+        developerLoginName: devCtx.state.developerLoginName,
+        developerGithubID: devCtx.state.developerGithubID,
+        firstName: devCtx.state.fname,
+        lastName: devCtx.state.lname,
+        email: devCtx.state.email,
+        linkedInLink: devCtx.state.linkedInLink,
+        resumeLink: devCtx.state.resumeLink,
         redirect: false
-    });
+    }
+
+    console.log('Settings settings', settings)
+
+    useEffect(() => {
+        setState(settings)
+    }, [devCtx.state])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("in Settings handleSubmit", devData.developerGithubID);
+        console.log("in Settings handleSubmit", devCtx.state.fname);
         const revDevData = {
-            developerLoginName: devData.developerLoginName,
-            developerGithubID: devData.developerGithubID,
+            developerLoginName: devCtx.state.developerLoginName,
+            developerGithubID: devCtx.state.developerGithubID,
             fname: state.firstName,
             lname: state.lastName,
             email: state.email,
@@ -112,6 +124,7 @@ const SettingsComp = () => {
                         />
                     </div> */}
                     {/* portfolio */}
+                    {console.log('SETTINGS state', state)}
                     <div className="createAccount">
                         <button type="submit">Change Settings</button>
                     </div>
