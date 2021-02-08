@@ -3,7 +3,6 @@ import { Redirect } from 'react-router';
 import md5 from 'blueimp-md5';
 
 import SetupContext from '../../contexts/SetupContext';
-import { set } from "mongoose";
 
 console.log('in LoginForm')
 
@@ -18,8 +17,6 @@ const LoginForm = () => {
     // console.log('in LoginForm, LSlogin: ', localStorage.getItem("jtsy-login"))
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log("HMMMM leaving CreateAccountcomp");
-        // props.handleInputChange();
         // console.log('Login handleSubmit', state.password, state.loggedIn);
         let hash = md5(state.password);
         if (hash === localStorage.getItem('jtsy-password')) {
@@ -73,7 +70,7 @@ const LoginForm = () => {
                     </div>
                 </form>
                 {setupCtx.state.loggedIn && (
-                    <Redirect to={'/'} />
+                    <Redirect to={'/developer'} />
                 )}
             </div>
         </div>

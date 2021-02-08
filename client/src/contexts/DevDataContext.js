@@ -39,7 +39,6 @@ export const DevDataProvider = props => {
                         linkedInLink: devData.linkedInLink,
                         resumeLink: devData.resumeLink,
                         repositories: devData.repositories,
-                        displayRepos: devData.displayRepos
                     })
                 },
                 resetDev: () => {

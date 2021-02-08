@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import API from './utils/API';
 import Developer from "./pages/Developer";
@@ -43,7 +43,6 @@ const App = () => {
           developerLoginName: activeDevData.data.developerLoginName,
           developerGithubID: activeDevData.data.developerGithubID,
           repositories: activeDevData.data.repositories,
-          displayRepos: activeDevData.data.displayRepos,
           fname: activeDevData.data.fname,
           lname: activeDevData.data.lname,
           email: activeDevData.data.email,
