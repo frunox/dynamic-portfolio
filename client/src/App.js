@@ -37,12 +37,13 @@ const App = () => {
         setupCtx.updateLoggedIn();
       }
       API.getActiveDevData().then((activeDevData) => {
-        console.log('APP activeDevData', activeDevData);
+        console.log('APP activeDevData', activeDevData.data);
 
         const developerData = {
           developerLoginName: activeDevData.data.developerLoginName,
           developerGithubID: activeDevData.data.developerGithubID,
           repositories: activeDevData.data.repositories,
+          displayRepos: activeDevData.data.displayRepos,
           fname: activeDevData.data.fname,
           lname: activeDevData.data.lname,
           email: activeDevData.data.email,
