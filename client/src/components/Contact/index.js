@@ -5,8 +5,8 @@ import "./contactStyle.css"
 
 
 function ContactComp() {
-  const { devData } = useContext(DevDataContext);
-  const githubLink = `https://github.com/${devData.developerLoginName}/`
+  const devCtx = useContext(DevDataContext);
+  const githubLink = `https://github.com/${devCtx.state.developerLoginName}/`
   return (
     <div className="contactContainer">
       <div className="container">
@@ -18,7 +18,7 @@ function ContactComp() {
           </a>
         </p>
         <p>
-          <a className="links" href={devData.linkedInLink} rel="noopener noreferrer" target="_blank" alt="LinkedIn link">
+          <a className="links" href={devCtx.state.linkedInLink} rel="noopener noreferrer" target="_blank" alt="LinkedIn link">
             LinkedIn
           </a>
         </p>

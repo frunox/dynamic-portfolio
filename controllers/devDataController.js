@@ -30,13 +30,14 @@ module.exports = {
           return res.json(err);
         } else {
           console.log("6d. here");
-          if (dbDeveloper) {
-            dbDeveloper.repositories = dbDeveloper.repositories.filter(
-              (repository) => repository.activeFlag == "true"
-            );
-          }
+          // if (dbDeveloper) {
+          //   dbDeveloper.repositories = dbDeveloper.repositories.filter(
+          //     (repository) => repository.activeFlag == "true"
+          //   );
+          // }
           // now we have the repos with activeFlag = true
-          // console.log('dbDeveloper in devDataController ', dbDeveloper.developerLoginName)
+          console.log('dbDeveloper in devDataController ', dbDeveloper.developerGithubID)
+          console.log('devDataController repositories', dbDeveloper.repositories.length)
           return res.json(dbDeveloper);
         }
       });

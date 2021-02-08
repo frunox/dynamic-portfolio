@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
+import SetupContext from '../../contexts/SetupContext';
+import DevDataContext from '../../contexts/DevDataContext';
 import './style.css';
 
 // console.log('in LoginForm')
 
 const LogoutForm = () => {
+    const setupCtx = useContext(SetupContext);
+    const devCtx = useContext(DevDataContext);
     const [state, setState] = useState({
         loggedIn: null,
         clearUser: false
@@ -28,7 +32,9 @@ const LogoutForm = () => {
         setState({
             ...state,
             clearUser: true
-        })
+        });
+        setupCtx.resetSetup();
+        devCtx.resetDev();
     };
 
     const developer = () => {
@@ -68,7 +74,7 @@ const LogoutForm = () => {
                     <Redirect to={'/developer'} />
                 )}
                 {state.clearUser && (
-                    <Redirect to={'/signin'} />
+                    <Redirect to={'/'} />
                 )}
             </div>
         </div>

@@ -1,18 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Jumbotron } from "../components/JumboTron";
 import PortCards from "../components/PortCards/portCards";
-import DevDataContext from "../contexts/DevDataContext";
 import HomeNav from "../components/HomeNav";
 import "./home.css";
 
 function Home() {
-  const { devData } = useContext(DevDataContext);
+  console.log('HOME start');
 
   return (
     <div className='home'>
       <HomeNav />
       <Jumbotron />
-      <PortCards className="cards" repositories={devData.repositories}></PortCards>
+      <PortCards className="cards"></PortCards>
     </div>
   );
 }

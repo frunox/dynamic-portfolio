@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect } from 'react-router';
 import md5 from 'blueimp-md5';
 
+import SetupContext from '../../contexts/SetupContext';
+
 console.log('in LoginForm')
 
-// handleInputChange is a prop from page Signin.js
 const LoginForm = () => {
+    const setupCtx = useContext(SetupContext);
     const [state, setState] = useState({
         githubID: "",
         password: "",
@@ -15,16 +17,11 @@ const LoginForm = () => {
     // console.log('in LoginForm, LSlogin: ', localStorage.getItem("jtsy-login"))
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log("HMMMM leaving CreateAccountcomp");
-        // props.handleInputChange();
         // console.log('Login handleSubmit', state.password, state.loggedIn);
         let hash = md5(state.password);
         if (hash === localStorage.getItem('jtsy-password')) {
             localStorage.setItem("jtsy-login", "true");
-            setState({
-                ...state,
-                loggedIn: true
-            })
+            setupCtx.updateLoggedIn();
         } else {
             alert('Re-enter password')
         }
@@ -72,8 +69,8 @@ const LoginForm = () => {
                         <button type="submit">Log In</button>
                     </div>
                 </form>
-                {state.loggedIn && (
-                    <Redirect to={'/'} />
+                {setupCtx.state.loggedIn && (
+                    <Redirect to={'/developer'} />
                 )}
             </div>
         </div>

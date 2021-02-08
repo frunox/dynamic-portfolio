@@ -1,18 +1,17 @@
 import React, { useState, useContext } from "react";
 import md5 from 'blueimp-md5';
 import API from "../../utils/API";
-import DevDataContext from "../../contexts/DevDataContext"
-// import { Redirect } from "react-router-dom";
-
-// const emailRegex = RegExp(
-//   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-// );
+import DevDataContext, { DevDataProvider } from "../../contexts/DevDataContext"
+import SetupContext, { SetupProvider } from "../../contexts/SetupContext"
 
 console.log('in CreateAccountcomp')
 
-// handleInputChange is a prop from page Signin.js
 const CreateAccountComp = (props) => {
-  const { devData } = useContext(DevDataContext);
+  const setupCtx = useContext(SetupContext);
+  const devDataCtx = useContext(DevDataContext);
+
+  console.log('CAC setupCtx', setupCtx);
+  console.log('CAC devDataCtx', devDataCtx);
   const [state, setState] = useState({
     firstName: null,
     lastName: null,
@@ -25,23 +24,31 @@ const CreateAccountComp = (props) => {
     loaded: null,
   });
 
+  console.log("1. CAC get dev");
 
-  // handleInputChange is a prop from page Signin.js
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("HMMMM leaving CreateAccountcomp");
-    props.handleInputChange();
+    console.log("CAC data entered");
+    // props.handleInputChange();
+    setupCtx.updateIsLoaded();
     let hash = md5(state.password);
-    console.log('CreateAccountcomp call getsync()', state.password, hash);
+    // console.log('CreateAccountcomp call getsync()', state.password, hash);
     localStorage.setItem('jtsy-password', hash);
     localStorage.setItem('jtsy-signin', "true");
     localStorage.setItem('jtsy-login', "false");
     // {developerLoginName: "frunox"}, {$set: {lname: "Black", fname: "Bob"}}
+    console.log('CAC state.githubID', state.githubID)
     API.getsync(state.githubID);
+    // API.getActiveDevData().then((activeDevData) => {
+    //   console.log('CAC activeDevData.data', activeDevData.data)
+    //   setDevData(activeDevData.data);
+    //   setState(activeDevData);
+    // });
     const developerData = {
-      repositories: [],
       developerLoginName: state.githubID,
       developerGithubID: " ",
+      repositories: [],
       fname: state.firstName,
       lname: state.lastName,
       email: state.email,
@@ -49,14 +56,10 @@ const CreateAccountComp = (props) => {
       resumeLink: state.resumeLink,
       active: true
     }
-    console.log('in createAcctComp: call updateDeveloper')
-    API.updateDeveloper(developerData)
-    setState({
-      ...state,
-      loaded: true
-    })
-    console.log('CAC state.devGithubID', state.developerGithubID)
-    devData.developerGithubID = state.developerGithubID;
+    console.log('in createAcctComp: call updateDeveloper', developerData);
+    devDataCtx.updateDev(developerData);
+    API.updateDeveloper(developerData);
+    console.log('CAC devDataCtx', devDataCtx)
   };
 
   const handleChange = (e) => {
