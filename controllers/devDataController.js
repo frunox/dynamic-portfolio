@@ -3,22 +3,22 @@ const mongoose = require("mongoose");
 console.log('6. in devDataController')
 module.exports = {
   // Get the active developer
-  findActiveDeveloper: function (req, res) {
-    console.log('6a. in findActiveDeveloper')
-    db.Developer.findOne({
-      active: true,
-    })
-      .populate("repositories")
-      .exec((err, dbDeveloper) => {
-        if (err) {
-          return res.json(err);
-        } else {
-          console.log('6b. dbDeveloper (w/ all repos) in devDataController ')
-          return res.json(dbDeveloper);
-        }
-      });
-  },
-
+  // findActiveDeveloper: function (req, res) {
+  //   console.log('6a. in findActiveDeveloper')
+  //   db.Developer.findOne({
+  //     active: true,
+  //   })
+  //     .populate("repositories")
+  //     .exec((err, dbDeveloper) => {
+  //       if (err) {
+  //         return res.json(err);
+  //       } else {
+  //         console.log('6b. dbDeveloper (w/ all repos) in devDataController ')
+  //         return res.json(dbDeveloper);
+  //       }
+  //     });
+  // },
+  // retrieve developer information from the DB, populate 'repositories' array, return the info
   getActiveDevData: function (req, res) {
     console.log('6c. in getActiveDevData')
     db.Developer.findOne({
@@ -29,14 +29,7 @@ module.exports = {
         if (err) {
           return res.json(err);
         } else {
-          console.log("6d. here");
-          // if (dbDeveloper) {
-          //   dbDeveloper.repositories = dbDeveloper.repositories.filter(
-          //     (repository) => repository.activeFlag == "true"
-          //   );
-          // }
-          // now we have the repos with activeFlag = true
-          console.log('dbDeveloper in devDataController ', dbDeveloper.developerGithubID)
+          // console.log('dbDeveloper in devDataController ', dbDeveloper.developerGithubID)
           console.log('devDataController repositories', dbDeveloper.repositories.length)
           return res.json(dbDeveloper);
         }
@@ -102,16 +95,6 @@ module.exports = {
       })
       .catch(err => console.log('deleteRepositories error', err));
   },
-
-  // deleteRepositories: function (req, res) {
-  //   console.log('6i. in deleteRepositories')
-  //   db.Repositories.deleteMany({})
-  //     .then(() => {
-  //       res.json(true);
-  //     })
-  //     .catch(err => console.log('deleteRepositories error', err));
-  // }
-
 };
 
 

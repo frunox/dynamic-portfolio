@@ -9,10 +9,10 @@ import './style.css'
 
 var tableData = []
 var filteredList = []
-var activeRepos = []
 
 const DevTable = () => {
   const devCtx = useContext(DevDataContext)
+  console.log('DEVTABLE devCtx', devCtx)
   const [state, setState] = useState({
     id: null,
     column: null,
@@ -32,7 +32,7 @@ const DevTable = () => {
 
   useEffect(() => {
     console.log('DevTable 1.  in useEffect')
-    API.getActiveDeveloper()
+    API.getActiveDevData()
       .then(res => {
         // console.log('DevTable 2. ')
         setState({
@@ -42,11 +42,8 @@ const DevTable = () => {
         });
         tableData = res.data.repositories
         console.log('DEVTABLE useEffect tableData', tableData)
-        activeRepos = tableData.filter(repo => repo.activeFlag === 'true')
-        console.log('DEVTABLE useEffect activeRepos', activeRepos)
         const developerData = {
           repositories: tableData,
-          displayRepos: activeRepos
         }
         devCtx.updateDev(developerData)
       });
