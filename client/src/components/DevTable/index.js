@@ -12,6 +12,7 @@ var filteredList = []
 
 const DevTable = () => {
   const devCtx = useContext(DevDataContext)
+  console.log('DEVTABLE devCtx', devCtx)
   const [state, setState] = useState({
     id: null,
     column: null,
