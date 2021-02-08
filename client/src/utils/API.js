@@ -16,12 +16,12 @@ export default {
     return axios.post("/api/developer/", developerData);
   },
 
-  // Call this function to find the active Developer.  You do not need to pass anything in.  If none are active, it is not setup yet.
+  // Call this function to find the active Developer.  You do not need to pass anything in.  If none are active, it is not setup yet.  DELETED THIS ROUTE - now using getActiveDevData
 
-  getActiveDeveloper: function () {
-    // console.log('/src/utils/API.js  getActiveDeveloper')
-    return axios.get("/api/devData/active/");
-  },
+  // getActiveDeveloper: function () {
+  //   // console.log('/src/utils/API.js  getActiveDeveloper')
+  //   return axios.get("/api/devData/active/");
+  // },
 
   // New function to revise developer data (name/links) via the Settings pags
   revDeveloper: function (revDevData) {

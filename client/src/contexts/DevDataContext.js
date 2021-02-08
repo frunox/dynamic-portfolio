@@ -6,7 +6,6 @@ const DevDataContext = React.createContext();
 
 // create a provider component
 // respositories = all repos
-// displayRepos = repos displayed on Home page
 // filteredRepos > for sorting
 export const DevDataProvider = props => {
     const [state, setState] = useState({
@@ -19,7 +18,6 @@ export const DevDataProvider = props => {
         resumeLink: "",
         active: true,
         repositories: [],
-        displayRepos: [],
         filteredRepos: [],
     });
 
@@ -53,7 +51,6 @@ export const DevDataProvider = props => {
                         resumeLink: "",
                         active: true,
                         repositories: [],
-                        displayRepos: [],
                         filteredRepos: [],
                     });
                 }
