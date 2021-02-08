@@ -5,6 +5,7 @@ import './style.css'
 
 function AboutUser() {
     const devCtx = useContext(DevDataContext);
+    console.log("ABOUT devCtx", devCtx)
     return (
         <Fragment>
             <Container className="grid">

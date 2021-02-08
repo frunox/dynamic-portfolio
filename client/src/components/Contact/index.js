@@ -23,7 +23,7 @@ function ContactComp() {
           </a>
         </p>
         <p>
-          <h3 classname="email">And Via Email at jrcannon@msn.com</h3>
+          <h3 classname="email">And Via Email at {devCtx.state.email}</h3>
           <EmailForm />
         </p>
       </div>
