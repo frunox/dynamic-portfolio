@@ -37,15 +37,17 @@ const DevTable = () => {
     keywords: ""
   })
 
+  tableData = devCtx.state.repositories;
+
   useEffect(() => {
-    console.log('DEVTABLE else devCtx', devCtx)
-    const repos = devCtx.state.repositories;
+    console.log('DEVTABLE devCtx', devCtx)
+
     setState({
       ...state,
-      data: repos,
-      filteredRepos: repos
+      data: tableData,
+      filteredRepos: tableData
     })
-  }, [repos])
+  }, [tableData])
 
 
   // useEffect(() => {

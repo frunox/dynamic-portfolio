@@ -2,12 +2,16 @@ import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from 'react-router'
 import API from "../../utils/API";
 import DevDataContext from "../../contexts/DevDataContext";
+import SetupContext from "../../contexts/SetupContext";
 
 console.log('in Settings')
 
 const SettingsComp = () => {
     const devCtx = useContext(DevDataContext);
     console.log("SETTINGS devCtx", devCtx.state, typeof devCtx.state)
+
+    const setupCtx = useContext(SetupContext);
+    console.log("SETTINGS setupCtx", setupCtx)
 
     // let testName = devCtx.state.fname
     // console.log('testName', testName, typeof testName)
@@ -45,6 +49,7 @@ const SettingsComp = () => {
         }
         console.log('in Settings: call updateDeveloper', revDevData.developerGithubID)
         API.revDeveloper(revDevData)
+        setupCtx.updateDevUpdated();
         setState({
             ...state,
             redirect: true,
