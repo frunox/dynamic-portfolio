@@ -7,7 +7,8 @@ export const SetupProvider = (props) => {
     const [state, setState] = useState({
         isLoaded: false,
         initialized: false,
-        loggedIn: false
+        loggedIn: false,
+        devUpdated: true
     });
 
     return (
@@ -23,6 +24,10 @@ export const SetupProvider = (props) => {
                 updateLoggedIn: () => {
                     console.log('setupCtx updateLoggedIn')
                     !state.loggedIn ? setState({ ...state, loggedIn: true }) : setState({ ...state, loggedIn: false });
+                },
+                updateDevUpdated: () => {
+                    console.log('setupCtx updateDevUpdated')
+                    !state.devUpdated ? setState({ ...state, devUpdated: true }) : setState({ ...state, devUpdated: false });
                 },
                 resetSetup: () => {
                     console.log('setupCtx resetSetup')

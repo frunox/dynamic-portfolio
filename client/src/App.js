@@ -12,13 +12,14 @@ import Settings from "./pages/Settings/Settings";
 import DevDataContext from "./contexts/DevDataContext";
 import SetupContext from "./contexts/SetupContext";
 import CreateAccountComp from "./components/CreateAccountcomp";
+import { set } from "mongoose";
 
 // devData - This is in the format of how we are reading the database.
 // state is set after call to db for active developer info and repos to display
 const App = () => {
   const setupCtx = useContext(SetupContext);
   console.log('APP init setupCtx', setupCtx)
-  console.log('APP setup isLoaded', JSON.stringify(setupCtx.state.isLoaded))
+  console.log('APP setup devUpdated', JSON.stringify(setupCtx.state.devUpdated))
 
   const devCtx = useContext(DevDataContext);
   console.log('APP devCtx', devCtx)
@@ -36,29 +37,32 @@ const App = () => {
       if (localStorage.getItem('jtsy-login') === 'true') {
         setupCtx.updateLoggedIn();
       }
-      API.getActiveDevData().then((activeDevData) => {
-        console.log('APP activeDevData', activeDevData.data);
+      console.log('APP devUpdated', setupCtx.state.devUpdated)
+      if (setupCtx.state.devUpdated) {
+        API.getActiveDevData().then((activeDevData) => {
+          console.log('APP activeDevData', activeDevData.data);
 
-        const developerData = {
-          developerLoginName: activeDevData.data.developerLoginName,
-          developerGithubID: activeDevData.data.developerGithubID,
-          repositories: activeDevData.data.repositories,
-          displayRepos: activeDevData.data.displayRepos,
-          fname: activeDevData.data.fname,
-          lname: activeDevData.data.lname,
-          email: activeDevData.data.email,
-          linkedInLink: activeDevData.data.linkedInLink,
-          resumeLink: activeDevData.data.resumeLink,
-          active: true
-        }
-        console.log('APP after DB call', developerData)
-        // update dev context with current user
-        devCtx.updateDev(developerData)
-        setupCtx.updateInitialized();
-
-      })
+          const developerData = {
+            developerLoginName: activeDevData.data.developerLoginName,
+            developerGithubID: activeDevData.data.developerGithubID,
+            repositories: activeDevData.data.repositories,
+            displayRepos: activeDevData.data.displayRepos,
+            fname: activeDevData.data.fname,
+            lname: activeDevData.data.lname,
+            email: activeDevData.data.email,
+            linkedInLink: activeDevData.data.linkedInLink,
+            resumeLink: activeDevData.data.resumeLink,
+            active: true
+          }
+          console.log('APP after DB call', developerData)
+          // update dev context with current user
+          devCtx.updateDev(developerData)
+          setupCtx.updateInitialized();
+          setupCtx.updateDevUpdated()
+        })
+      }
     };
-  }, [])
+  }, [setupCtx.state.devUpdated])
 
   console.log('APP initialized', initialized)
   // if (localStorage.getItem("jtsy-signin") === "true") {

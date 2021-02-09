@@ -1,8 +1,9 @@
 // import axios from "axios";
 import _ from "lodash";
 import React, { useState, useEffect, useContext, Fragment } from "react";
-import { Table, Form, Button, Modal, Container, Segment, Checkbox } from "semantic-ui-react";
+import { Table, Form, Button, Modal, Container, Segment, Checkbox, Responsive } from "semantic-ui-react";
 import DevDataContext from '../../contexts/DevDataContext';
+import SetupContext from '../../contexts/SetupContext';
 import API from "../../utils/API";
 import RepoSearchBox from "../RepoSearchBox";
 import './style.css'
@@ -12,7 +13,13 @@ var filteredList = []
 
 const DevTable = () => {
   const devCtx = useContext(DevDataContext)
-  console.log('DEVTABLE devCtx', devCtx)
+  const repos = devCtx.state.repositories;
+  console.log('DEVTABLE devCtx', devCtx, 'repos', repos)
+
+
+  const setupCtx = useContext(SetupContext);
+  console.log('DEVTABLE setupCtx', setupCtx)
+
   const [state, setState] = useState({
     id: null,
     column: null,
@@ -31,23 +38,44 @@ const DevTable = () => {
   })
 
   useEffect(() => {
-    console.log('DevTable 1.  in useEffect')
-    API.getActiveDevData()
-      .then(res => {
-        // console.log('DevTable 2. ')
-        setState({
-          ...state,
-          data: res.data.repositories,
-          filteredRepos: res.data.repositories,
-        });
-        tableData = res.data.repositories
-        console.log('DEVTABLE useEffect tableData', tableData)
-        const developerData = {
-          repositories: tableData,
-        }
-        devCtx.updateDev(developerData)
-      });
-  }, []);
+    console.log('DEVTABLE else devCtx', devCtx)
+    const repos = devCtx.state.repositories;
+    setState({
+      ...state,
+      data: repos,
+      filteredRepos: repos
+    })
+  }, [repos])
+
+
+  // useEffect(() => {
+  //   console.log('DevTable 1.  in useEffect updateDev', setupCtx.state.updateDev)
+  //   if (false) {
+  //     API.getActiveDevData()
+  //       .then(res => {
+  //         // console.log('DevTable 2. ')
+  //         setState({
+  //           ...state,
+  //           data: res.data.repositories,
+  //           filteredRepos: res.data.repositories,
+  //         });
+  //         tableData = res.data.repositories
+  //         console.log('DEVTABLE useEffect tableData', tableData)
+  //         const developerData = {
+  //           repositories: tableData,
+  //         }
+  //         devCtx.updateDev(developerData);
+  //       });
+  //   } else {
+  //     console.log('DEVTABLE else devCtx', devCtx)
+  //     const repos = devCtx.state.repositories;
+  //     setState({
+  //       ...state,
+  //       data: repos,
+  //       filteredRepos: repos
+  //     })
+  //   }
+  // }, []);
 
   const handleSort = (clickedColumn) => () => {
     const { column, filteredRepos, direction } = state;
