@@ -2,22 +2,7 @@ const db = require("../models");
 const mongoose = require("mongoose");
 console.log('6. in devDataController')
 module.exports = {
-  // Get the active developer
-  // findActiveDeveloper: function (req, res) {
-  //   console.log('6a. in findActiveDeveloper')
-  //   db.Developer.findOne({
-  //     active: true,
-  //   })
-  //     .populate("repositories")
-  //     .exec((err, dbDeveloper) => {
-  //       if (err) {
-  //         return res.json(err);
-  //       } else {
-  //         console.log('6b. dbDeveloper (w/ all repos) in devDataController ')
-  //         return res.json(dbDeveloper);
-  //       }
-  //     });
-  // },
+
   // retrieve developer information from the DB, populate 'repositories' array, return the info
   getActiveDevData: function (req, res) {
     console.log('6c. in getActiveDevData')
