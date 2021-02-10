@@ -25,7 +25,7 @@ app.get("*", function (req, res) {
 
 // Connect to the Mongo DB (portfolio_db)
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/portfolio_db",
+  process.env.MONGODB_URI || "mongodb://localhost/dynamic_db",
   {
     useCreateIndex: true,
     useNewUrlParser: true,
