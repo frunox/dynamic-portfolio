@@ -72,6 +72,9 @@ const LoginForm = () => {
                         <button type="submit">Log In</button>
                     </div>
                 </form>
+                <div className="goBack">
+                    <button onClick={() => history.goBack()}>Go Back</button>
+                </div>
                 {/* {setupCtx.state.loggedIn && (
                     <Redirect to={'/developer'} />
                 )} */}
