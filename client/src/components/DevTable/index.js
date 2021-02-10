@@ -1,6 +1,8 @@
 // import axios from "axios";
 import _ from "lodash";
 import React, { useState, useEffect, useContext, Fragment } from "react";
+import { Redirect } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Table, Form, Button, Modal, Container, Segment, Checkbox } from "semantic-ui-react";
 import DevDataContext from '../../contexts/DevDataContext';
 import SetupContext from '../../contexts/SetupContext';
@@ -16,9 +18,10 @@ const DevTable = () => {
   const repos = devCtx.state.repositories;
   console.log('DEVTABLE devCtx', devCtx, 'repos', repos)
 
-
   const setupCtx = useContext(SetupContext);
   console.log('DEVTABLE setupCtx', setupCtx)
+
+  const history = useHistory();
 
   const [state, setState] = useState({
     id: null,
@@ -34,7 +37,8 @@ const DevTable = () => {
     filteredRepos: null,
     searched: -1,
     searchID: null,
-    keywords: ""
+    keywords: "",
+    login: false
   })
 
   tableData = devCtx.state.repositories;
@@ -195,6 +199,14 @@ const DevTable = () => {
     });
   };
 
+  const logInHandler = () => {
+    history.push("/login", { from: "Developer" })
+    setState({
+      ...state,
+      login: true
+    })
+  }
+
   const { column, direction, rowClick, filteredRepos } = state;
 
   let content = (
@@ -248,10 +260,29 @@ const DevTable = () => {
       <div>
         <Container>
           <Modal
+            closeIcon='true'
             className="repoModal"
             open={rowClick >= 0}
             size="tiny"
           >
+            {!setupCtx.state.loggedIn && (
+              <Modal.Content>
+                <div>
+                  <h1>You must be logged in to change settings</h1>
+                  <form onSubmit={logInHandler}>
+                    <div className="createAccount">
+                      <button type="submit" onCLick={logInHandler}>Log In</button>
+                    </div>
+                  </form>
+                </div>
+              </Modal.Content>
+            )
+            }
+            {
+              state.login && (
+                <Redirect to={'/login'} />
+              )
+            }
             <Modal.Header className="modalHeader">Update Repository:  <span>{state.repoName}</span></Modal.Header>
             <Modal.Content>
               <Segment>
@@ -290,11 +321,13 @@ const DevTable = () => {
                       <input className="urlBox" name="keywords" label='Keywords: ' placeholder="keywords..." value={state.value} onChange={(event) => handleLinkChange(event)} />
                     </Form.Field>
                   </Form.Group>
-                  <Button color="teal" fluid active
-                    type="submit"
-                  >
-                    Update
-                </Button>
+                  {setupCtx.state.loggedIn && (
+                    <Button color="teal" fluid active
+                      type="submit"
+                    >
+                      Update
+                    </Button>
+                  )}
                 </Form>
               </Segment>
 
