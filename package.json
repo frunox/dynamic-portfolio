@@ -7,7 +7,7 @@
     "node": "12.16.x"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "blueimp-md5": "^2.16.0",
     "bootstrap": "^4.5.0",
     "concurrently": "^5.2.0",
@@ -32,12 +32,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://https://github.com/frunox/jtsy.git"
+    "url": "git+https://https://github.com/frunox/dynamic-portfolio.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://https://github.com/frunox/jtsy/issues"
+    "url": "https://https://github.com/frunox/dynamic-portfolio/issues"
   },
-  "homepage": "https://https://github.com/frunox/jtsy#readme"
+  "homepage": "https://https://github.com/frunox/dynamic-portfolio#readme"
 }
