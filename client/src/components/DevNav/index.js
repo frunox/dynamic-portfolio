@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { Menu } from 'semantic-ui-react';
 import DevDataContext from '../../contexts/DevDataContext'
+import SetupContext from '../../contexts/SetupContext';
 import "./style.css";
 
 const DevNav = () => {
   const devCtx = useContext(DevDataContext)
+  const setupCtx = useContext(SetupContext)
 
   let content = (
     <div>
@@ -24,11 +26,15 @@ const DevNav = () => {
           <Menu.Item as="a" icon="setting" href="/settings">
           </Menu.Item>
 
-          {/* <Menu.Item href="/login" name="login">
-          </Menu.Item> */}
+          {!setupCtx.state.loggedIn ? (
+            <Menu.Item href="/login" name="login">
+            </Menu.Item>
+          ) : (
+              <Menu.Item as="a" href="/logout" name="logout">
+              </Menu.Item>
+            )
+          }
 
-          <Menu.Item as="a" href="/logout" name="logout">
-          </Menu.Item>
         </Menu.Menu>
       </Menu>
 

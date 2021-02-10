@@ -59,7 +59,7 @@ The home, about and contact pages are now accessible. However, to customize the 
 
 Once you have created an account or signed in, you will see a list of your GitHub projects (repositories) on the developer page. The columns are sortable, and the search box find projects using key words.
 
-<img src="client/src/assets/jtsy-developer.png" alt="Developer Page">
+<img src="client/src/assets/dynamic-portfolio_developer.png" alt="Developer Page">
 
 #### Project Dialog
 
@@ -83,7 +83,8 @@ The selected projects are now displayed on the home page. The user's name is dyn
 
 This page is about the user. It can be customized as needed to individualize the presentation. The user's name and resume link are dynamically provided from the account settings.
 
-<img src="client/src/assets/jtsy-about.png" alt="About Page">
+<img src="client/src/assets/dynamic-portfolio_
+about.png" alt="About Page">
 
 #### Contact Page
 

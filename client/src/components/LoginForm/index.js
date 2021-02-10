@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import md5 from 'blueimp-md5';
 
 import SetupContext from '../../contexts/SetupContext';
@@ -8,6 +9,7 @@ console.log('in LoginForm')
 
 const LoginForm = () => {
     const setupCtx = useContext(SetupContext);
+    const history = useHistory();
     const [state, setState] = useState({
         githubID: "",
         password: "",
@@ -22,6 +24,7 @@ const LoginForm = () => {
         if (hash === localStorage.getItem('jtsy-password')) {
             localStorage.setItem("jtsy-login", "true");
             setupCtx.updateLoggedIn();
+            history.length > 0 ? history.goBack() : history.replace('/developer');
         } else {
             alert('Re-enter password')
         }
@@ -31,7 +34,7 @@ const LoginForm = () => {
     const handleChange = (e) => {
         e.preventDefault();
         const { name, value } = e.target;
-
+        console.log('history', history)
         setState({ ...state, [name]: value });
         // console.log(name, value)
     };
@@ -69,9 +72,9 @@ const LoginForm = () => {
                         <button type="submit">Log In</button>
                     </div>
                 </form>
-                {setupCtx.state.loggedIn && (
+                {/* {setupCtx.state.loggedIn && (
                     <Redirect to={'/developer'} />
-                )}
+                )} */}
             </div>
         </div>
     );

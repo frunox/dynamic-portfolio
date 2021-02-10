@@ -63,33 +63,6 @@ const App = () => {
   }, [setupCtx.state.devUpdated])
 
   console.log('APP initialized', initialized)
-  // if (localStorage.getItem("jtsy-signin") === "true") {
-  //   console.log('signin=true, redirect to Home page')
-  //   return (
-  //     <div>
-  //       <Home />
-  //     </div>)
-  // } else {
-  //   console.log('No dev/ to CAC')
-  //   return (
-  //     <div>
-  //       <CreateAccountComp />
-  //     </div>
-  //   );
-  // }
-
-
-  // if (!setupCtx.isLoaded) {
-  //   console.log('APP isloaded', JSON.stringify(setupCtx.state.isLoaded), 'to Signin/CAC')
-  //   return (
-  //     <CreateAccountComp />
-  //   )
-  // } else {
-  //   console.log('APP isLoaded',)
-  //   return (
-  //     <Home />
-  //   )
-  // }
 
   return (
     <div>

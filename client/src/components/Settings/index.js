@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import API from "../../utils/API";
 import DevDataContext from "../../contexts/DevDataContext";
 import SetupContext from "../../contexts/SetupContext";
@@ -13,6 +14,7 @@ const SettingsComp = () => {
     const setupCtx = useContext(SetupContext);
     console.log("SETTINGS setupCtx", setupCtx)
 
+    const history = useHistory();
     // let testName = devCtx.state.fname
     // console.log('testName', testName, typeof testName)
 
@@ -26,7 +28,8 @@ const SettingsComp = () => {
         email: devCtx.state.email,
         linkedInLink: devCtx.state.linkedInLink,
         resumeLink: devCtx.state.resumeLink,
-        redirect: false
+        redirect: false,
+        login: false
     }
 
     console.log('Settings settings', settings)
@@ -64,9 +67,33 @@ const SettingsComp = () => {
         setState({ ...state, [name]: value });
     };
 
+    const logInHandler = () => {
+        history.push("/login", { from: "Settings" })
+        setState({
+            ...state,
+            login: true
+        })
+    }
+
     let content = (
         <div className="wrapper">
             <div className="form-wrapper">
+                {!setupCtx.state.loggedIn && (
+                    <div>
+                        <h1>You must be logged in to change settings</h1>
+                        <form onSubmit={logInHandler}>
+                            <div className="createAccount">
+                                <button type="submit" onCLick={logInHandler}>Log In</button>
+                            </div>
+                        </form>
+                    </div>
+                )
+                }
+                {
+                    state.login && (
+                        <Redirect to={'/login'} />
+                    )
+                }
                 <h1>Revise User Information</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="firstName">
@@ -117,27 +144,18 @@ const SettingsComp = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    {/* resume */}
-                    {/* portfolio */}
-                    {/* <div className="portfolioLink">
-                        <label htmlFor="portfolioLink">Portfolio Link</label>
-                        <input
-                            placeholder={state.portfolioLink}
-                            type="text"
-                            name="portfolioLink"
-                            onChange={handleChange}
-                        />
-                    </div> */}
-                    {/* portfolio */}
                     {console.log('SETTINGS state', state)}
-                    <div className="createAccount">
-                        <button type="submit">Change Settings</button>
-                    </div>
+                    {setupCtx.state.loggedIn && (
+                        <div className="createAccount">
+                            <button type="submit">Change Settings</button>
+                        </div>)
+                    }
                 </form>
                 {state.redirect && (
                     <Redirect to={'/developer'} />
                 )}
             </div>
+
         </div>
     );
     return content;
