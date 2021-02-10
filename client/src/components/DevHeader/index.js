@@ -8,7 +8,7 @@ const DevHeader = () => (
             className="devHeader"
             textAlign='center'
             dividing>
-            Welcome to jtsy Portfolio
+            Welcome to your Dynamic Portfolio
         </Header>
     </div>
 )

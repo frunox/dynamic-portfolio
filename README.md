@@ -4,7 +4,7 @@
 
 Dynamic Portfolio is an app that automatically creates a curated portfolio from a developer's GitHub projects. The portfolio is presented in a standardized format for potential employers, or others, to view. The app imports all of a user's repositories, and allows you to choose which to highlight on the home page. Different projects can be shown for different viewers.
 
-This project is a refinement of jtsy Portfolio, an earlier version that was functional, but not optimized. The code base for Dynamic Portfolio eliminates 17 components and 2 contexts, consolidates routes, and reduces unnecessary API calls to make the app more responsive. Much of this is the result of more effective use of the React Context API.
+This project is a refinement of jtsy Portfolio, an earlier version that was functional, but not optimized. The code base for Dynamic Portfolio eliminates 17 components and 2 contexts, consolidates routes, and reduces unnecessary API calls to make the app more perfomant. Much of this is the result of more effective use of the React Context API.
 
 ### Installation
 

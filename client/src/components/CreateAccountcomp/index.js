@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import md5 from 'blueimp-md5';
 import API from "../../utils/API";
-import DevDataContext, { DevDataProvider } from "../../contexts/DevDataContext"
-import SetupContext, { SetupProvider } from "../../contexts/SetupContext"
+import DevDataContext from "../../contexts/DevDataContext"
+import SetupContext from "../../contexts/SetupContext"
 
 console.log('in CreateAccountcomp')
 

@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Menu } from 'semantic-ui-react';
+import DevDataContext from '../../contexts/DevDataContext'
 import "./style.css";
 
 const DevNav = () => {
+  const devCtx = useContext(DevDataContext)
 
   let content = (
     <div>
       <Menu inverted stackable fixed="top" className="menu">
-        <Menu.Item header className="logo">jtsy PORTFOLIO</Menu.Item>
+        <Menu.Item header className="logo">{devCtx.state.fname} {devCtx.state.lname}</Menu.Item>
         <Menu.Menu position="left">
           <Menu.Item as="a" href="/" name="home">
           </Menu.Item>

@@ -1,7 +1,7 @@
 // import axios from "axios";
 import _ from "lodash";
 import React, { useState, useEffect, useContext, Fragment } from "react";
-import { Table, Form, Button, Modal, Container, Segment, Checkbox, Responsive } from "semantic-ui-react";
+import { Table, Form, Button, Modal, Container, Segment, Checkbox } from "semantic-ui-react";
 import DevDataContext from '../../contexts/DevDataContext';
 import SetupContext from '../../contexts/SetupContext';
 import API from "../../utils/API";
