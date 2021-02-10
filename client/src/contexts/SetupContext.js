@@ -25,9 +25,12 @@ export const SetupProvider = (props) => {
                     console.log('setupCtx updateLoggedIn')
                     !state.loggedIn ? setState({ ...state, loggedIn: true }) : setState({ ...state, loggedIn: false });
                 },
-                updateDevUpdated: () => {
-                    console.log('setupCtx updateDevUpdated')
-                    !state.devUpdated ? setState({ ...state, devUpdated: true }) : setState({ ...state, devUpdated: false });
+                updateDevUpdated: (value) => {
+                    console.log('setupCtx updateDevUpdated', value)
+                    setState({
+                        ...state,
+                        devUpdated: value
+                    })
                 },
                 resetSetup: () => {
                     console.log('setupCtx resetSetup')

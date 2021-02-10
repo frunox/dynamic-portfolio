@@ -49,7 +49,7 @@ const SettingsComp = () => {
         }
         console.log('in Settings: call updateDeveloper', revDevData.developerGithubID)
         API.revDeveloper(revDevData)
-        setupCtx.updateDevUpdated();
+        setupCtx.updateDevUpdated(true);
         setState({
             ...state,
             redirect: true,

@@ -57,7 +57,7 @@ const App = () => {
           // update dev context with current user
           devCtx.updateDev(developerData)
           setupCtx.updateInitialized();
-          setupCtx.updateDevUpdated()
+          setupCtx.updateDevUpdated(false)
         })
       }
     };
