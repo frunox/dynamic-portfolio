@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from 'react-router'
 import API from "../../utils/API";
+import LoginForm from '../LoginForm/LoginModal'
 import DevDataContext from "../../contexts/DevDataContext";
 import SetupContext from "../../contexts/SetupContext";
 
@@ -66,6 +67,9 @@ const SettingsComp = () => {
 
     let content = (
         <div className="wrapper">
+            {!setupCtx.state.loggedIn && (
+                <LoginForm />
+            )}
             <div className="form-wrapper">
                 <h1>Revise User Information</h1>
                 <form onSubmit={handleSubmit}>
@@ -117,18 +121,6 @@ const SettingsComp = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    {/* resume */}
-                    {/* portfolio */}
-                    {/* <div className="portfolioLink">
-                        <label htmlFor="portfolioLink">Portfolio Link</label>
-                        <input
-                            placeholder={state.portfolioLink}
-                            type="text"
-                            name="portfolioLink"
-                            onChange={handleChange}
-                        />
-                    </div> */}
-                    {/* portfolio */}
                     {console.log('SETTINGS state', state)}
                     <div className="createAccount">
                         <button type="submit">Change Settings</button>

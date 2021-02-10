@@ -29,13 +29,10 @@ const HomeNav = () => {
           <Menu.Item as="a" href="/contact" name="contact">
           </Menu.Item>
 
-          {loggedIn ? (
-            <Menu.Item as="a" href="/developer" name="developer">
-            </Menu.Item>
-          ) : (
-              <Menu.Item href="/login" name="login">
-              </Menu.Item>
-            )}
+
+          <Menu.Item as="a" href="/developer" name="developer">
+          </Menu.Item>
+
         </Menu.Menu>
       </Menu>
 
