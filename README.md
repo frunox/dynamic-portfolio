@@ -1,8 +1,10 @@
-# jtsy-Portfolio
+# Dynamic Portfolio
 
 ## Description
 
-Portfolio Generator is an app that automatically creates a curated portfolio from a developer's GitHub projects. The portfolio is presented in a standardized format for potential employers, or others, to view. The app imports all of a user's repositories, and allows you to choose which to highlight on the home page. Different projects can be shown for different viewers.
+Dynamic Portfolio is an app that automatically creates a curated portfolio from a developer's GitHub projects. The portfolio is presented in a standardized format for potential employers, or others, to view. The app imports all of a user's repositories, and allows you to choose which to highlight on the home page. Different projects can be shown for different viewers.
+
+This project is a refinement of jtsy Portfolio, an earlier version that was functional, but not optimized. The code base for Dynamic Portfolio eliminates 17 components and 2 contexts, consolidates routes, and reduces unnecessary API calls to make the app more responsive. Much of this is the result of more effective use of the React Context API.
 
 ### Installation
 
@@ -12,7 +14,7 @@ Portfolio Generator is an app that automatically creates a curated portfolio fro
 - npm start to open the app locally
 - Apply your own styling and links as needed
 
-### How Portfolio Generator Works
+### How Dynamic Portfolio Works
 
 This application uses the GitHub user name to retrieve all of a developer's projects, including shared projects. On the Developer page, the user will see table of the repositories. The 'activeFlag' determines if that project will be shown on the home page. Clicking on a row selects that project and allows the user to change the 'activeFlag' to true, and to add deployment link, if different from the link on the GitHub repository page. An image representing the project can be added to include on the home page.
 
