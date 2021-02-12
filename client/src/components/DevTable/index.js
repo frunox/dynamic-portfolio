@@ -271,7 +271,7 @@ const DevTable = () => {
                   <h1>You must be logged in to change settings</h1>
                   <form onSubmit={logInHandler}>
                     <div className="createAccount">
-                      <button type="submit" onCLick={logInHandler}>Log In</button>
+                      <button type="submit" onClick={logInHandler}>Log In</button>
                     </div>
                   </form>
                 </div>

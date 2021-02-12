@@ -27,7 +27,7 @@ const DevNav = () => {
           </Menu.Item>
 
           {!setupCtx.state.loggedIn ? (
-            <Menu.Item href="/login" name="login">
+            <Menu.Item as="a" href="/login" name="login">
             </Menu.Item>
           ) : (
               <Menu.Item as="a" href="/logout" name="logout">

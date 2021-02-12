@@ -8,7 +8,8 @@ export const SetupProvider = (props) => {
         isLoaded: false,
         initialized: false,
         loggedIn: false,
-        devUpdated: true
+        devUpdated: true,
+        loginModalOpen: false
     });
 
     return (
@@ -31,7 +32,14 @@ export const SetupProvider = (props) => {
                         ...state,
                         devUpdated: value
                     })
+                }, openLoginModal: (value) => {
+                    console.log('setupCtx openLoginModal', value)
+                    setState({
+                        ...state,
+                        openLoginModal: value
+                    })
                 },
+
                 resetSetup: () => {
                     console.log('setupCtx resetSetup')
                     setState({

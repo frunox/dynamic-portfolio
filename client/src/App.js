@@ -6,7 +6,7 @@ import NoMatch from "./pages/NoMatch";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
-import Login from "./pages/Login";
+import LoginModal from './components/LoginForm/LoginModal';
 import Logout from "./pages/Logout";
 import Settings from "./pages/Settings/Settings";
 import DevDataContext from "./contexts/DevDataContext";
@@ -78,7 +78,7 @@ const App = () => {
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/about" component={About} />
             <Route exact path="/developer" component={Developer} />
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/login" component={LoginModal} />
             <Route exact path="/logout" component={Logout} />
             <Route exact path="/signin" component={CreateAccountComp} />
             <Route exact path="/settings" component={Settings} />
