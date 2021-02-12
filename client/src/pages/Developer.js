@@ -3,7 +3,8 @@ import { Container } from 'semantic-ui-react';
 import DevNav from "../components/DevNav";
 import DevHeader from "../components/DevHeader";
 import DevContainer from '../components/DevContainer'
-import DevTable from '../components/DevTable'
+import DevTable from '../components/DevTable';
+import LoginModal from '../components/LoginForm/LoginModal'
 import "./developer.css";
 
 function Developer() {
@@ -16,7 +17,7 @@ function Developer() {
       </Container>
       <DevContainer />
       <DevTable />
-
+      <LoginModal />
     </div>
   );
 }

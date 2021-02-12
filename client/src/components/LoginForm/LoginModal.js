@@ -12,15 +12,19 @@ console.log('in LoginForm')
 
 const LoginModal = () => {
   const setupCtx = useContext(SetupContext);
+  console.log("LOGINMODAL setupCtx", setupCtx)
   const [state, setState] = useState({
     githubID: "",
     password: "",
     loggedIn: false
   });
 
-  const [modalIsOpen, setModalIsOpen] = useState(true)
+  // const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const history = useHistory();
+
+  let openModal = setupCtx.state.openLoginModal;
+  console.log('LOGINMODAL openModal', openModal)
 
   // console.log('in LoginModal, LSlogin: ', localStorage.getItem("jtsy-login"))
   const handleSubmit = (e) => {
@@ -30,13 +34,13 @@ const LoginModal = () => {
     if (hash === localStorage.getItem('jtsy-password')) {
       localStorage.setItem("jtsy-login", "true");
 
-      setupCtx.updateLoggedIn();
     } else {
       alert('Re-enter password')
     }
-    // history.length > 0 ? history.goBack() : history.replace('/developer');
-    history.goBack();
-    setModalIsOpen(false)
+    history.length > 0 ? history.replace('/developer') : history.replace('/developer');
+    // history.goBack();
+    setupCtx.updateLoggedIn();
+    setupCtx.openLoginModal(false);
   };
 
   const handleChange = (e) => {
@@ -47,9 +51,14 @@ const LoginModal = () => {
     // console.log(name, value)
   };
 
+  const goBack = () => {
+    setupCtx.openLoginModal(false);
+    history.replace('/developer')
+  }
+
   let content = (
     <div className='App'>
-      <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}
+      <Modal isOpen={openModal} onRequestClose={() => setupCtx.openLoginModal(false)}
         // shouldCloseOnOverlayClick={false}
         style={{
           overlay: {
@@ -57,10 +66,13 @@ const LoginModal = () => {
           },
           content: {
             borderRadius: '10px',
-            left: '20%',
-            right: '20%',
-            bottom: '35%',
-            border: '1px solid black'
+            top: '90px',
+            left: '25%',
+            right: '25%',
+            bottom: '30%',
+            border: '1px solid black',
+            width: '400px',
+            margin: 'auto'
           }
         }}
       >
@@ -95,7 +107,7 @@ const LoginModal = () => {
           </div>
         </form>
         <div className="goBack">
-          <button onClick={() => history.goBack()}>Go Back</button>
+          <button onClick={goBack}>Go Back</button>
         </div>
       </Modal>
     </div >

@@ -2,18 +2,16 @@ import React, { useContext } from 'react';
 import { Menu } from 'semantic-ui-react';
 import DevDataContext from '../../contexts/DevDataContext'
 import SetupContext from '../../contexts/SetupContext';
-import LoginModal from '../LoginForm/LoginModal';
 import "./style.css";
 
 const DevNav = () => {
   const devCtx = useContext(DevDataContext)
   const setupCtx = useContext(SetupContext)
+  console.log('DEVNAV setupCtx', setupCtx)
 
   const openModal = () => {
     console.log('DEVNAV in openModal')
-    return (
-      <LoginModal />
-    )
+    setupCtx.openLoginModal(true)
   }
 
   let content = (
