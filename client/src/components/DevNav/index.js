@@ -9,10 +9,16 @@ const DevNav = () => {
   const setupCtx = useContext(SetupContext)
   console.log('DEVNAV setupCtx', setupCtx)
 
-  const openModal = () => {
-    console.log('DEVNAV in openModal')
+  const openLoginModal = () => {
+    console.log('DEVNAV in openLoginModal')
     setupCtx.updateLoggedIn()
     setupCtx.openLoginModal(true)
+  }
+
+  const openLogoutModal = () => {
+    console.log('DEVNAV in openLogoutModal')
+    setupCtx.updateLoggedIn()
+    setupCtx.openLogoutModal(true)
   }
 
   let content = (
@@ -34,10 +40,10 @@ const DevNav = () => {
           </Menu.Item>
 
           {!setupCtx.state.loggedIn ? (
-            <Menu.Item name="login" onClick={openModal}>
+            <Menu.Item name="login" onClick={openLoginModal}>
             </Menu.Item>
           ) : (
-              <Menu.Item as="a" href="/logout" name="logout">
+              <Menu.Item name="logout" onClick={openLogoutModal}>
               </Menu.Item>
             )
           }

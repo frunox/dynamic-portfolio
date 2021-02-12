@@ -7,7 +7,7 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import LoginModal from './components/LoginForm/LoginModal';
-import Logout from "./pages/Logout";
+import LogoutModal from "./components/LogoutForm/LogoutModal";
 import Settings from "./pages/Settings/Settings";
 import DevDataContext from "./contexts/DevDataContext";
 import SetupContext from "./contexts/SetupContext";
@@ -79,7 +79,7 @@ const App = () => {
             <Route exact path="/about" component={About} />
             <Route exact path="/developer" component={Developer} />
             <Route exact path="/login" component={LoginModal} />
-            <Route exact path="/logout" component={Logout} />
+            <Route exact path="/logout" component={LogoutModal} />
             <Route exact path="/signin" component={CreateAccountComp} />
             <Route exact path="/settings" component={Settings} />
             <Route component={NoMatch} />

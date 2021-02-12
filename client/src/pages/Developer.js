@@ -5,6 +5,7 @@ import DevHeader from "../components/DevHeader";
 import DevContainer from '../components/DevContainer'
 import DevTable from '../components/DevTable';
 import LoginModal from '../components/LoginForm/LoginModal'
+import LogoutModal from '../components/LogoutForm/LogoutModal'
 import "./developer.css";
 
 function Developer() {
@@ -18,6 +19,7 @@ function Developer() {
       <DevContainer />
       <DevTable />
       <LoginModal />
+      <LogoutModal />
     </div>
   );
 }
