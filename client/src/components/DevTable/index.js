@@ -200,11 +200,11 @@ const DevTable = () => {
   };
 
   const logInHandler = () => {
-    history.push("/login", { from: "Developer" })
     setState({
       ...state,
       login: true
     })
+    setupCtx.openLoginModal(true)
   }
 
   const { column, direction, rowClick, filteredRepos } = state;
@@ -247,7 +247,7 @@ const DevTable = () => {
             {_.map(
               filteredRepos,
               ({ repoDesc, activeFlag, repoName, repoID }, index) => (
-                <Table.Row className="devRow" id={index} key={index} value={index} active onClick={e => showDevRepo(repoID)}>
+                <Table.Row className="devRow" id={index} key={repoID} value={index} active onClick={e => showDevRepo(repoID)}>
                   <Table.Cell>{repoName}</Table.Cell>
                   <Table.Cell>{repoDesc}</Table.Cell>
                   <Table.Cell textAlign="center">{activeFlag}</Table.Cell>

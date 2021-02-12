@@ -68,11 +68,11 @@ const SettingsComp = () => {
     };
 
     const logInHandler = () => {
-        history.push("/login", { from: "Settings" })
         setState({
             ...state,
             login: true
         })
+        setupCtx.openLoginModal(true)
     }
 
     let content = (

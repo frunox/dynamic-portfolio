@@ -37,8 +37,10 @@ const LoginModal = () => {
     } else {
       alert('Re-enter password')
     }
-    history.length > 0 ? history.replace('/developer') : history.replace('/developer');
+    // history.length > 0 ? history.replace('/developer') : history.replace('/developer');
     // history.goBack();
+    // history.replace('/developer')
+    history.push("/developer")
     setupCtx.updateLoggedIn();
     setupCtx.openLoginModal(false);
   };

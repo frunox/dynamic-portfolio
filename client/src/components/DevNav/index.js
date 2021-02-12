@@ -11,6 +11,7 @@ const DevNav = () => {
 
   const openModal = () => {
     console.log('DEVNAV in openModal')
+    setupCtx.updateLoggedIn()
     setupCtx.openLoginModal(true)
   }
 
