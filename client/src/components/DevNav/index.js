@@ -2,11 +2,19 @@ import React, { useContext } from 'react';
 import { Menu } from 'semantic-ui-react';
 import DevDataContext from '../../contexts/DevDataContext'
 import SetupContext from '../../contexts/SetupContext';
+import LoginModal from '../LoginForm/LoginModal';
 import "./style.css";
 
 const DevNav = () => {
   const devCtx = useContext(DevDataContext)
   const setupCtx = useContext(SetupContext)
+
+  const openModal = () => {
+    console.log('DEVNAV in openModal')
+    return (
+      <LoginModal />
+    )
+  }
 
   let content = (
     <div>
@@ -27,7 +35,7 @@ const DevNav = () => {
           </Menu.Item>
 
           {!setupCtx.state.loggedIn ? (
-            <Menu.Item as="a" href="/login" name="login">
+            <Menu.Item name="login" onClick={openModal}>
             </Menu.Item>
           ) : (
               <Menu.Item as="a" href="/logout" name="logout">
