@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
 import { useHistory } from 'react-router-dom';
+import './styles.css'
 
 import DevDataContext from '../../contexts/DevDataContext';
 import SetupContext from '../../contexts/SetupContext';
@@ -63,7 +64,7 @@ const LogoutModal = () => {
   };
 
   let content = (
-    <div className='wrapper'>
+    <div className='App'>
       <Modal isOpen={openModal} onRequestClose={() => setupCtx.openLogoutModal(false)}
         // shouldCloseOnOverlayClick={false}
         style={{
@@ -73,42 +74,38 @@ const LogoutModal = () => {
           content: {
             borderRadius: '10px',
             top: '90px',
-            left: '25%',
-            right: '25%',
             bottom: '30%',
             border: '1px solid black',
-            width: '400px',
+            width: '500px',
             margin: 'auto'
           }
         }}
       >
-        <div className='wrapper'>
-          <h1>Log Out</h1>
-          <div
-            className="logoutButton"
-            onClick={logout}>
-            <button type="submit">Confirm</button>
-          </div>
-          <div
-            className="removeButton"
-            onClick={removeUser}>
-            <button type="submit">Remove All User Data</button>
-          </div>
-          <div
-            className="createAccount"
-            onClick={developer}>
-            <button type="submit">Return</button>
-          </div>
-          {state.loggedIn === false && (
-            <Redirect to={'/'} />
-          )}
-          {state.loggedIn && (
-            <Redirect to={'/developer'} />
-          )}
-          {state.clearUser && (
-            <Redirect to={'/'} />
-          )}
+        <h1>Log Out</h1>
+        <div
+          className="logoutButton"
+          onClick={logout}>
+          <button type="submit">Confirm</button>
         </div>
+        <div
+          className="removeButton"
+          onClick={removeUser}>
+          <button type="submit">Remove All User Data</button>
+        </div>
+        <div
+          className="createAccount"
+          onClick={developer}>
+          <button type="submit">Return</button>
+        </div>
+        {state.loggedIn === false && (
+          <Redirect to={'/'} />
+        )}
+        {state.loggedIn && (
+          <Redirect to={'/developer'} />
+        )}
+        {state.clearUser && (
+          <Redirect to={'/'} />
+        )}
       </Modal >
     </div >
   );
