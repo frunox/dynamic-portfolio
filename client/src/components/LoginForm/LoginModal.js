@@ -34,8 +34,9 @@ const LoginModal = () => {
     } else {
       alert('Re-enter password')
     }
+    // history.length > 0 ? history.goBack() : history.replace('/developer');
+    history.goBack();
     setModalIsOpen(false)
-    history.length > 0 ? history.goBack() : history.replace('/developer');
   };
 
   const handleChange = (e) => {
@@ -58,7 +59,7 @@ const LoginModal = () => {
             borderRadius: '10px',
             left: '20%',
             right: '20%',
-            bottom: '40%',
+            bottom: '35%',
             border: '1px solid black'
           }
         }}
