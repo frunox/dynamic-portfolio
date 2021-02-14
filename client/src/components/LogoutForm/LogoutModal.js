@@ -10,12 +10,12 @@ import SetupContext from '../../contexts/SetupContext';
 
 Modal.setAppElement(document.getElementById('root'))
 
-console.log('in LogoutModal')
+// console.log('in LogoutModal')
 
 const LogoutModal = () => {
   const devCtx = useContext(DevDataContext);
   const setupCtx = useContext(SetupContext);
-  console.log("LOGOUTMODAL setupCtx", setupCtx)
+  // console.log("LOGOUTMODAL setupCtx", setupCtx)
   const [state, setState] = useState({
     loggedIn: null,
     clearUser: false
@@ -26,7 +26,7 @@ const LogoutModal = () => {
   const history = useHistory();
 
   let openModal = setupCtx.state.openLogoutModal;
-  console.log('LOGINMODAL openModal', openModal)
+  // console.log('LOGINMODAL openModal', openModal)
 
   const logout = () => {
     // console.log('Logout logout');
@@ -35,7 +35,7 @@ const LogoutModal = () => {
       ...state,
       loggedIn: false
     })
-    history.push("/home")
+    // history.push("/home")
     setupCtx.updateLoggedIn();
     setupCtx.openLogoutModal(false);
   };
@@ -74,16 +74,17 @@ const LogoutModal = () => {
           content: {
             borderRadius: '10px',
             top: '90px',
-            bottom: '30%',
+            // bottom: '30%',
+            height: '275px',
             border: '1px solid black',
-            width: '500px',
+            width: '400px',
             margin: 'auto'
           }
         }}
       >
         <h1>Log Out</h1>
         <div
-          className="logoutButton"
+          className="createAccount"
           onClick={logout}>
           <button type="submit">Confirm</button>
         </div>
@@ -93,12 +94,12 @@ const LogoutModal = () => {
           <button type="submit">Remove All User Data</button>
         </div>
         <div
-          className="createAccount"
+          className="returnButton"
           onClick={developer}>
           <button type="submit">Return</button>
         </div>
-        {state.loggedIn === false && (
-          <Redirect to={'/'} />
+        {!state.loggedIn && (
+          <Redirect to={'/developer'} />
         )}
         {state.loggedIn && (
           <Redirect to={'/developer'} />

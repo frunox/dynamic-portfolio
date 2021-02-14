@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import API from './utils/API';
 import Developer from "./pages/Developer";
@@ -16,12 +16,27 @@ import CreateAccountComp from "./components/CreateAccountcomp";
 // devData - This is in the format of how we are reading the database.
 // state is set after call to db for active developer info and repos to display
 const App = () => {
+  const [state, setState] = useState(
+    {
+      loggedIn: null
+    }
+  )
+
   const setupCtx = useContext(SetupContext);
-  console.log('APP init setupCtx', setupCtx)
-  console.log('APP setup devUpdated', JSON.stringify(setupCtx.state.devUpdated))
+  // console.log('APP init setupCtx', setupCtx)
+  // console.log('APP setup devUpdated', JSON.stringify(setupCtx.state.devUpdated))
 
   const devCtx = useContext(DevDataContext);
-  console.log('APP devCtx', devCtx)
+  // console.log('APP devCtx', devCtx)
+
+  let login = setupCtx.state.loggedIn;
+  // console.log('APP login', login, 'state.loggedIn', state.loggedIn)
+
+  useEffect(() => {
+    // console.log("APP useEffect login", login, state.loggedIn)
+    setState({ loggedIn: login })
+  }, [login])
+
 
   // variable to control routing
   let initialized = false;
@@ -32,14 +47,14 @@ const App = () => {
   // If user is active, update devDataContext and set initialized = true
   useEffect(() => {
     if (initialized) {
-      console.log('APP useEffect signin=true, redirect to Home page');
+      // console.log('APP useEffect signin=true, redirect to Home page');
       if (localStorage.getItem('jtsy-login') === 'true') {
         setupCtx.updateLoggedIn();
       }
-      console.log('APP devUpdated', setupCtx.state.devUpdated)
+      // console.log('APP devUpdated', setupCtx.state.devUpdated)
       if (setupCtx.state.devUpdated) {
         API.getActiveDevData().then((activeDevData) => {
-          console.log('APP activeDevData', activeDevData.data);
+          // console.log('APP activeDevData', activeDevData.data);
 
           const developerData = {
             developerLoginName: activeDevData.data.developerLoginName,
@@ -52,7 +67,7 @@ const App = () => {
             resumeLink: activeDevData.data.resumeLink,
             active: true
           }
-          console.log('APP after DB call', developerData)
+          // console.log('APP after DB call', developerData)
           // update dev context with current user
           devCtx.updateDev(developerData)
           setupCtx.updateInitialized();
@@ -62,7 +77,7 @@ const App = () => {
     };
   }, [setupCtx.state.devUpdated])
 
-  console.log('APP initialized', initialized)
+  // console.log('APP initialized', initialized)
 
   return (
     <div>

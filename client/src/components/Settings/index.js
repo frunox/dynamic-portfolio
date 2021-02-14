@@ -5,7 +5,7 @@ import API from "../../utils/API";
 import DevDataContext from "../../contexts/DevDataContext";
 import SetupContext from "../../contexts/SetupContext";
 
-console.log('in Settings')
+// console.log('in Settings')
 
 const SettingsComp = () => {
     const devCtx = useContext(DevDataContext);
@@ -32,7 +32,7 @@ const SettingsComp = () => {
         login: false
     }
 
-    console.log('Settings settings', settings)
+    // console.log('Settings settings', settings)
 
     useEffect(() => {
         setState(settings)

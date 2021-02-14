@@ -8,11 +8,11 @@ import SetupContext from '../../contexts/SetupContext';
 
 Modal.setAppElement(document.getElementById('root'))
 
-console.log('in LoginForm')
+// console.log('in LoginForm')
 
 const LoginModal = () => {
   const setupCtx = useContext(SetupContext);
-  console.log("LOGINMODAL setupCtx", setupCtx)
+  // console.log("LOGINMODAL setupCtx", setupCtx)
   const [state, setState] = useState({
     githubID: "",
     password: "",
@@ -24,12 +24,12 @@ const LoginModal = () => {
   const history = useHistory();
 
   let openModal = setupCtx.state.openLoginModal;
-  console.log('LOGINMODAL openModal', openModal)
+  // console.log('LOGINMODAL openModal', openModal)
 
   // console.log('in LoginModal, LSlogin: ', localStorage.getItem("jtsy-login"))
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Login handleSubmit', state.password, state.loggedIn);
+    // console.log('Login handleSubmit', state.password, state.loggedIn);
     let hash = md5(state.password);
     if (hash === localStorage.getItem('jtsy-password')) {
       localStorage.setItem("jtsy-login", "true");
@@ -37,6 +37,10 @@ const LoginModal = () => {
     } else {
       alert('Re-enter password')
     }
+    setState({
+      ...state,
+      loggedIn: true
+    })
     // history.length > 0 ? history.replace('/developer') : history.replace('/developer');
     // history.goBack();
     // history.replace('/developer')
@@ -48,7 +52,7 @@ const LoginModal = () => {
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    console.log('handleChange', name, value)
+    // console.log('handleChange', name, value)
     setState({ ...state, [name]: value });
     // console.log(name, value)
   };

@@ -16,10 +16,10 @@ var filteredList = []
 const DevTable = () => {
   const devCtx = useContext(DevDataContext)
   const repos = devCtx.state.repositories;
-  console.log('DEVTABLE devCtx', devCtx, 'repos', repos)
+  // console.log('DEVTABLE devCtx', devCtx, 'repos', repos)
 
   const setupCtx = useContext(SetupContext);
-  console.log('DEVTABLE setupCtx', setupCtx)
+  // console.log('DEVTABLE setupCtx', setupCtx)
 
   const history = useHistory();
 
@@ -44,7 +44,7 @@ const DevTable = () => {
   tableData = devCtx.state.repositories;
 
   useEffect(() => {
-    console.log('DEVTABLE devCtx', devCtx)
+    // console.log('DEVTABLE devCtx', devCtx)
 
     setState({
       ...state,
@@ -120,7 +120,7 @@ const DevTable = () => {
       ...state,
       rowClick: -1,
     });
-    console.log('in handleLinkUpdate ', state.keywords)
+    // console.log('in handleLinkUpdate ', state.keywords)
     updateDB(state.id, { deploymentLink: state.deploymentLink, imageLink: state.imageLink, keywords: state.keywords })
   }
 
