@@ -4,7 +4,7 @@ import API from "../../utils/API";
 import DevDataContext from "../../contexts/DevDataContext"
 import SetupContext from "../../contexts/SetupContext"
 
-console.log('in CreateAccountcomp')
+// console.log('in CreateAccountcomp')
 
 const CreateAccountComp = (props) => {
   const setupCtx = useContext(SetupContext);

@@ -16,10 +16,10 @@ var filteredList = []
 const DevTable = () => {
   const devCtx = useContext(DevDataContext)
   const repos = devCtx.state.repositories;
-  console.log('DEVTABLE devCtx', devCtx, 'repos', repos)
+  // console.log('DEVTABLE devCtx', devCtx, 'repos', repos)
 
   const setupCtx = useContext(SetupContext);
-  console.log('DEVTABLE setupCtx', setupCtx)
+  // console.log('DEVTABLE setupCtx', setupCtx)
 
   const history = useHistory();
 
@@ -44,7 +44,7 @@ const DevTable = () => {
   tableData = devCtx.state.repositories;
 
   useEffect(() => {
-    console.log('DEVTABLE devCtx', devCtx)
+    // console.log('DEVTABLE devCtx', devCtx)
 
     setState({
       ...state,
@@ -120,7 +120,7 @@ const DevTable = () => {
       ...state,
       rowClick: -1,
     });
-    console.log('in handleLinkUpdate ', state.keywords)
+    // console.log('in handleLinkUpdate ', state.keywords)
     updateDB(state.id, { deploymentLink: state.deploymentLink, imageLink: state.imageLink, keywords: state.keywords })
   }
 
@@ -200,11 +200,11 @@ const DevTable = () => {
   };
 
   const logInHandler = () => {
-    history.push("/login", { from: "Developer" })
     setState({
       ...state,
       login: true
     })
+    setupCtx.openLoginModal(true)
   }
 
   const { column, direction, rowClick, filteredRepos } = state;
@@ -247,7 +247,7 @@ const DevTable = () => {
             {_.map(
               filteredRepos,
               ({ repoDesc, activeFlag, repoName, repoID }, index) => (
-                <Table.Row className="devRow" id={index} key={index} value={index} active onClick={e => showDevRepo(repoID)}>
+                <Table.Row className="devRow" id={index} key={repoID} value={index} active onClick={e => showDevRepo(repoID)}>
                   <Table.Cell>{repoName}</Table.Cell>
                   <Table.Cell>{repoDesc}</Table.Cell>
                   <Table.Cell textAlign="center">{activeFlag}</Table.Cell>
@@ -271,7 +271,7 @@ const DevTable = () => {
                   <h1>You must be logged in to change settings</h1>
                   <form onSubmit={logInHandler}>
                     <div className="createAccount">
-                      <button type="submit" onCLick={logInHandler}>Log In</button>
+                      <button type="submit" onClick={logInHandler}>Log In</button>
                     </div>
                   </form>
                 </div>

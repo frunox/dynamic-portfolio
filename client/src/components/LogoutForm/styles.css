@@ -108,14 +108,14 @@ input.error {
 .password {
   width: 100%;
 }
-
+/* 
 .createAccount {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
+} */
+/* 
 .createAccount button {
   background-color: teal;
   color: #fff;
@@ -127,7 +127,7 @@ input.error {
   font-weight: lighter;
   letter-spacing: 1px;
   margin-bottom: 0.25em;
-}
+} */
 
 .createAccount button:hover {
   color: #519e8a;
@@ -140,9 +140,22 @@ input.error {
   font-weight: lighter;
 }
 
-.goBack button {
-  background-color: rgb(128, 83, 0);
-  color: #fff;
+.removeButton button {
+  background-color: red;
+  color: black;
+  border: 2px solid #fff;
+  width: 100%;
+  margin-top: 1em;
+  padding: 8px 0px;
+  font-size: 1em;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  margin-bottom: 0.25em;
+}
+
+.returnButton button {
+  background-color: #f5d833e3;
+  color: black;
   border: 2px solid #fff;
   width: 100%;
   margin-top: 1em;

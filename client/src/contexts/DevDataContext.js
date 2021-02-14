@@ -26,7 +26,7 @@ export const DevDataProvider = props => {
             {
                 state: state,
                 updateDev: (devData) => {
-                    console.log('DEVDATACONTEXT updateDev devData', devData)
+                    // console.log('DEVDATACONTEXT updateDev devData', devData)
                     setState({
                         ...state,
                         developerLoginName: devData.developerLoginName,
@@ -40,7 +40,7 @@ export const DevDataProvider = props => {
                     })
                 },
                 resetDev: () => {
-                    console.log('devCtx resetDev')
+                    // console.log('devCtx resetDev')
                     setState({
                         developerLoginName: "",
                         developerGithubID: "",
@@ -61,6 +61,6 @@ export const DevDataProvider = props => {
     )
 }
 
-console.log('in DevDataContext ', DevDataContext._currentValue)
+// console.log('in DevDataContext ', DevDataContext._currentValue)
 
 export default DevDataContext;

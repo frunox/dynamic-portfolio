@@ -1,12 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Menu } from 'semantic-ui-react';
 import DevDataContext from '../../contexts/DevDataContext'
 import SetupContext from '../../contexts/SetupContext';
 import "./style.css";
 
 const DevNav = () => {
+  let [state, setState] = useState()
   const devCtx = useContext(DevDataContext)
   const setupCtx = useContext(SetupContext)
+
+  const isLoggedIn = localStorage.getItem("jtsy-login");
+  // console.log('DEVNAV isloggedIn', isLoggedIn, 'state', state.loggedIn)
+  useEffect(() => {
+    console.log('DEVNAV useEffect isLoggedIn', isLoggedIn)
+    setState(isLoggedIn)
+  }, [isLoggedIn])
+
+  // console.log("DEVNAV state", state)
+
+  const openLoginModal = () => {
+    // console.log('DEVNAV in openLoginModal')
+    // setupCtx.updateLoggedIn()
+    setupCtx.openLoginModal(true)
+  }
+
+  const openLogoutModal = () => {
+    // console.log('DEVNAV in openLogoutModal')
+    // setupCtx.updateLoggedIn()
+    setupCtx.openLogoutModal(true)
+  }
 
   let content = (
     <div>
@@ -26,11 +48,11 @@ const DevNav = () => {
           <Menu.Item as="a" icon="setting" href="/settings">
           </Menu.Item>
 
-          {!setupCtx.state.loggedIn ? (
-            <Menu.Item href="/login" name="login">
+          {isLoggedIn === 'false' ? (
+            <Menu.Item name="login" onClick={openLoginModal}>
             </Menu.Item>
           ) : (
-              <Menu.Item as="a" href="/logout" name="logout">
+              <Menu.Item name="logout" onClick={openLogoutModal}>
               </Menu.Item>
             )
           }

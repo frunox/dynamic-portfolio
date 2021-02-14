@@ -5,7 +5,7 @@ export default {
 
   // Send in the github user name
   getActiveDevData: function () {
-    console.log('2. in API.js getActiveDevData, to routes/index.js /api/devData/activeDevData/')
+    // console.log('2. in API.js getActiveDevData, to routes/index.js /api/devData/activeDevData/')
     return axios.get("/api/devData/activeDevData/");
   },
 
