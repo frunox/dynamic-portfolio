@@ -1,5 +1,6 @@
 // import axios from "axios";
 import _ from "lodash";
+import { set } from "mongoose";
 import React, { useState, useEffect, useContext, Fragment } from "react";
 import { Redirect } from 'react-router';
 import { useHistory } from 'react-router-dom';
@@ -53,35 +54,7 @@ const DevTable = () => {
     })
   }, [tableData])
 
-
-  // useEffect(() => {
-  //   console.log('DevTable 1.  in useEffect updateDev', setupCtx.state.updateDev)
-  //   if (false) {
-  //     API.getActiveDevData()
-  //       .then(res => {
-  //         // console.log('DevTable 2. ')
-  //         setState({
-  //           ...state,
-  //           data: res.data.repositories,
-  //           filteredRepos: res.data.repositories,
-  //         });
-  //         tableData = res.data.repositories
-  //         console.log('DEVTABLE useEffect tableData', tableData)
-  //         const developerData = {
-  //           repositories: tableData,
-  //         }
-  //         devCtx.updateDev(developerData);
-  //       });
-  //   } else {
-  //     console.log('DEVTABLE else devCtx', devCtx)
-  //     const repos = devCtx.state.repositories;
-  //     setState({
-  //       ...state,
-  //       data: repos,
-  //       filteredRepos: repos
-  //     })
-  //   }
-  // }, []);
+  let openModal = setupCtx.state.repoModalOpen;
 
   const handleSort = (clickedColumn) => () => {
     const { column, filteredRepos, direction } = state;
@@ -258,82 +231,7 @@ const DevTable = () => {
         </Table >
       </div >
       <div>
-        <Container>
-          <Modal
-            closeIcon='true'
-            className="repoModal"
-            open={rowClick >= 0}
-            size="tiny"
-          >
-            {!setupCtx.state.loggedIn && (
-              <Modal.Content>
-                <div>
-                  <h1>You must be logged in to change settings</h1>
-                  <form onSubmit={logInHandler}>
-                    <div className="createAccount">
-                      <button type="submit" onClick={logInHandler}>Log In</button>
-                    </div>
-                  </form>
-                </div>
-              </Modal.Content>
-            )
-            }
-            {
-              state.login && (
-                <Redirect to={'/login'} />
-              )
-            }
-            <Modal.Header className="modalHeader">Update Repository:  <span>{state.repoName}</span></Modal.Header>
-            <Modal.Content>
-              <Segment>
-                <Form>
-                  <Form.Field>
-                    <label className="inputLabel">Current Display Status: {state.activeFlag}</label>
-                    <Checkbox
-                      className="inputLabel"
-                      label='Display'
-                      checked={state.activeFlag === 'true'}
-                      onChange={() => updateFlag(state.rowClick)}
-                    />
-                  </Form.Field>
-                </Form>
-              </Segment>
-              <Segment>
-                <Form onSubmit={(event) => handleLinkUpdate(event)}>
-                  <Form.Group>
-                    <Form.Field inline>
-                      <div>Current Deployment URL:</div>
-                      <label className="inputLabel">{state.deploymentLink}</label>
-                      <input className="urlBox" name="deploymentLink" label='Deployment URL: ' placeholder="new link" value={state.value} onChange={(event) => handleLinkChange(event)} />
-                    </Form.Field>
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Field inline>
-                      <div>Current Image Link:</div>
-                      <label className="inputLabel">{state.imageLink}</label>
-                      <input className="urlBox" name="imageLink" label='Image URL: ' placeholder="new link" value={state.value} onChange={(event) => handleLinkChange(event)} />
-                    </Form.Field>
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Field inline>
-                      <div>Add Keywords:</div>
-                      <label className="inputLabel">{state.keywords}</label>
-                      <input className="urlBox" name="keywords" label='Keywords: ' placeholder="keywords..." value={state.value} onChange={(event) => handleLinkChange(event)} />
-                    </Form.Field>
-                  </Form.Group>
-                  {setupCtx.state.loggedIn && (
-                    <Button color="teal" fluid active
-                      type="submit"
-                    >
-                      Update
-                    </Button>
-                  )}
-                </Form>
-              </Segment>
-
-            </Modal.Content>
-          </Modal>
-        </Container>
+        {openModal ? setupCtx.openRepoModal(true) : null}
       </div>
     </Fragment >
   );

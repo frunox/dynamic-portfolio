@@ -6,6 +6,7 @@ import DevContainer from '../components/DevContainer'
 import DevTable from '../components/DevTable';
 import LoginModal from '../components/LoginForm/LoginModal'
 import LogoutModal from '../components/LogoutForm/LogoutModal'
+import RepoModal from '../components/RepoModal/RepoModal'
 import SetupContext from '../contexts/SetupContext';
 import "./developer.css";
 
@@ -31,6 +32,7 @@ function Developer() {
       <DevTable />
       <LoginModal />
       <LogoutModal />
+      <RepoModal />
     </div>
   );
 }
