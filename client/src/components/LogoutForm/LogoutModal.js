@@ -25,8 +25,8 @@ const LogoutModal = () => {
 
   const history = useHistory();
 
-  let openModal = setupCtx.state.openLogoutModal;
-  // console.log('LOGINMODAL openModal', openModal)
+  let openModal = setupCtx.state.logoutModalOpen;
+  console.log('LOGINMODAL openModal', openModal)
 
   const logout = () => {
     // console.log('Logout logout');

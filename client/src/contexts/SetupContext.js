@@ -35,17 +35,17 @@ export const SetupProvider = (props) => {
                         devUpdated: value
                     })
                 }, openLoginModal: (value) => {
-                    // console.log('setupCtx openLoginModal', value)
+                    console.log('setupCtx openLoginModal', value)
                     setState({
                         ...state,
-                        openLoginModal: value
+                        loginModalOpen: value
                     })
                 },
                 openLogoutModal: (value) => {
                     // console.log('setupCtx openLogoutModal', value)
                     setState({
                         ...state,
-                        openLogoutModal: value
+                        logoutModalOpen: value
                     })
                 },
                 setLastPage: (value) => {

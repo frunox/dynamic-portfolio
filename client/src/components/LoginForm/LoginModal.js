@@ -23,8 +23,8 @@ const LoginModal = () => {
 
   const history = useHistory();
 
-  let openModal = setupCtx.state.openLoginModal;
-  // console.log('LOGINMODAL openModal', openModal)
+  let openModal = setupCtx.state.loginModalOpen;
+  console.log('LOGINMODAL openModal', openModal)
 
   // console.log('in LoginModal, LSlogin: ', localStorage.getItem("jtsy-login"))
   const handleSubmit = (e) => {
