@@ -275,10 +275,10 @@ const DevTable = () => {
               content: {
                 borderRadius: '10px',
                 top: '90px',
-                height: 'min-content',
                 border: '1px solid black',
                 width: '600px',
-                margin: 'auto'
+                margin: '0 auto',
+                height: '395px'
               }
             }}
           >

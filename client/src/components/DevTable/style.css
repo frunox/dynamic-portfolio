@@ -9,6 +9,10 @@ body {
   margin-left: 5%;
 }
 
+.repoModal {
+  height: 'min-content';
+}
+
 .formBox {
   border: 1px solid black;
   margin-top: 5px;
