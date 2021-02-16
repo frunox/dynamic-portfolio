@@ -107,6 +107,13 @@ div.inline.field {
   padding-right: 0;
 }
 
+.formLabel {
+  display: block;
+  width: 100%;
+  color: black;
+  font-weight: normal;
+}
+
 label.inputLabel {
   width: 250px;
 }
@@ -126,12 +133,13 @@ label.inputLabel {
   border: 1px solid rgba(34, 36, 38, 0.5);
 }
 
-input .urlBox {
+input.urlBox {
   margin-bottom: 10px;
+  width: 100%;
 }
 
-.ui[class*="right floated"].button,
-.ui[class*="right floated"].buttons {
+.ui[class*='right floated'].button,
+.ui[class*='right floated'].buttons {
   float: right;
   margin-right: -0.6em;
   margin-top: 8%;

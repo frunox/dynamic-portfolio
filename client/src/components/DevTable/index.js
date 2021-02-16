@@ -3,12 +3,15 @@ import _ from "lodash";
 import React, { useState, useEffect, useContext, Fragment } from "react";
 import { Redirect } from 'react-router';
 import { useHistory } from 'react-router-dom';
-import { Table, Form, Button, Modal, Container, Segment, Checkbox } from "semantic-ui-react";
+import Modal from 'react-modal';
+import { Table, Button, Container, Checkbox } from "semantic-ui-react";
 import DevDataContext from '../../contexts/DevDataContext';
 import SetupContext from '../../contexts/SetupContext';
 import API from "../../utils/API";
 import RepoSearchBox from "../RepoSearchBox";
 import './style.css'
+
+Modal.setAppElement(document.getElementById('root'))
 
 var tableData = []
 var filteredList = []
@@ -42,6 +45,9 @@ const DevTable = () => {
   })
 
   tableData = devCtx.state.repositories;
+
+  let openModal = setupCtx.state.repoModalOpen;
+  console.log('DEVTABLE openModal', openModal)
 
   useEffect(() => {
     // console.log('DEVTABLE devCtx', devCtx)
@@ -122,6 +128,7 @@ const DevTable = () => {
     });
     // console.log('in handleLinkUpdate ', state.keywords)
     updateDB(state.id, { deploymentLink: state.deploymentLink, imageLink: state.imageLink, keywords: state.keywords })
+    setupCtx.openRepoModal(false)
   }
 
   const handleSearchChange = event => {
@@ -197,6 +204,7 @@ const DevTable = () => {
       activeFlag: tableData[id].activeFlag,
       keywords: tableData[id].keywords
     });
+    setupCtx.openRepoModal(true);
   };
 
   const logInHandler = () => {
@@ -259,23 +267,30 @@ const DevTable = () => {
       </div >
       <div>
         <Container>
-          <Modal
-            closeIcon='true'
-            className="repoModal"
-            open={rowClick >= 0}
-            size="tiny"
+          <Modal isOpen={openModal} onRequestClose={() => setupCtx.openRepoModal(false)}
+            style={{
+              overlay: {
+                backgroundColor: 'rgba(155, 155, 155, 0.5)'
+              },
+              content: {
+                borderRadius: '10px',
+                top: '90px',
+                bottom: '32%',
+                border: '1px solid black',
+                width: '600px',
+                margin: 'auto'
+              }
+            }}
           >
             {!setupCtx.state.loggedIn && (
-              <Modal.Content>
-                <div>
-                  <h1>You must be logged in to change settings</h1>
-                  <form onSubmit={logInHandler}>
-                    <div className="createAccount">
-                      <button type="submit" onClick={logInHandler}>Log In</button>
-                    </div>
-                  </form>
-                </div>
-              </Modal.Content>
+              <div>
+                <h1>You must be logged in to change settings</h1>
+                <form onSubmit={logInHandler}>
+                  <div className="createAccount">
+                    <button type="submit" onClick={logInHandler}>Log In</button>
+                  </div>
+                </form>
+              </div>
             )
             }
             {
@@ -283,55 +298,32 @@ const DevTable = () => {
                 <Redirect to={'/login'} />
               )
             }
-            <Modal.Header className="modalHeader">Update Repository:  <span>{state.repoName}</span></Modal.Header>
-            <Modal.Content>
-              <Segment>
-                <Form>
-                  <Form.Field>
-                    <label className="inputLabel">Current Display Status: {state.activeFlag}</label>
-                    <Checkbox
-                      className="inputLabel"
-                      label='Display'
-                      checked={state.activeFlag === 'true'}
-                      onChange={() => updateFlag(state.rowClick)}
-                    />
-                  </Form.Field>
-                </Form>
-              </Segment>
-              <Segment>
-                <Form onSubmit={(event) => handleLinkUpdate(event)}>
-                  <Form.Group>
-                    <Form.Field inline>
-                      <div>Current Deployment URL:</div>
-                      <label className="inputLabel">{state.deploymentLink}</label>
-                      <input className="urlBox" name="deploymentLink" label='Deployment URL: ' placeholder="new link" value={state.value} onChange={(event) => handleLinkChange(event)} />
-                    </Form.Field>
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Field inline>
-                      <div>Current Image Link:</div>
-                      <label className="inputLabel">{state.imageLink}</label>
-                      <input className="urlBox" name="imageLink" label='Image URL: ' placeholder="new link" value={state.value} onChange={(event) => handleLinkChange(event)} />
-                    </Form.Field>
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Field inline>
-                      <div>Add Keywords:</div>
-                      <label className="inputLabel">{state.keywords}</label>
-                      <input className="urlBox" name="keywords" label='Keywords: ' placeholder="keywords..." value={state.value} onChange={(event) => handleLinkChange(event)} />
-                    </Form.Field>
-                  </Form.Group>
-                  {setupCtx.state.loggedIn && (
-                    <Button color="teal" fluid active
-                      type="submit"
-                    >
-                      Update
-                    </Button>
-                  )}
-                </Form>
-              </Segment>
-
-            </Modal.Content>
+            <h1 className="modalHeader">Update Repository:  <span>{state.repoName}</span></h1>
+            <form>
+              <label className="inputLabel">Current Display Status: {state.activeFlag}</label>
+              <Checkbox
+                className="inputLabel"
+                label='Display'
+                checked={state.activeFlag === 'true'}
+                onChange={() => updateFlag(state.rowClick)}
+              />
+              <hr />
+            </form>
+            <form onSubmit={(event) => handleLinkUpdate(event)}>
+              <label className='inputLabel' Name="inputLabel">Current Deployment Link:</label>
+              <input className="urlBox" name="deploymentLink" placeholder={state.deploymentLink} value={state.value} onChange={(event) => handleLinkChange(event)} />
+              <label className="inputLabel">Current Image Link</label>
+              <input className="urlBox" name="imageLink" placeholder={state.imageLink} value={state.value} onChange={(event) => handleLinkChange(event)} />
+              <label className="inputLabel">Add Keywords</label>
+              <input className="urlBox" name="keywords" label='Keywords: ' placeholder={state.keywords} value={state.value} onChange={(event) => handleLinkChange(event)} />
+              {setupCtx.state.loggedIn && (
+                <Button color="teal" fluid active
+                  type="submit"
+                >
+                  Update
+                </Button>
+              )}
+            </form>
           </Modal>
         </Container>
       </div>
