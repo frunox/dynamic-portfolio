@@ -275,7 +275,7 @@ const DevTable = () => {
               content: {
                 borderRadius: '10px',
                 top: '90px',
-                bottom: '32%',
+                height: 'min-content',
                 border: '1px solid black',
                 width: '600px',
                 margin: 'auto'
