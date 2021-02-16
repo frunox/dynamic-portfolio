@@ -11,6 +11,7 @@ export const SetupProvider = (props) => {
         devUpdated: true,
         loginModalOpen: false,
         logoutModalOpen: false,
+        repoModalOpen: false,
         lastPage: ""
     });
 
@@ -46,6 +47,13 @@ export const SetupProvider = (props) => {
                     setState({
                         ...state,
                         logoutModalOpen: value
+                    })
+                },
+                openRepoModal: (value) => {
+                    // console.log('setupCtx openLogoutModal', value)
+                    setState({
+                        ...state,
+                        repoModalOpen: value
                     })
                 },
                 setLastPage: (value) => {
