@@ -58,7 +58,7 @@ export const SetupProvider = (props) => {
                     })
                 },
                 openSettingsModal: (value) => {
-                    // console.log('setupCtx openSettingsModal', value)
+                    console.log('setupCtx openSettingsModal', value)
                     setState({
                         ...state,
                         settingsModalOpen: value

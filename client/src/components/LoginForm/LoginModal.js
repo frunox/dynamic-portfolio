@@ -79,7 +79,8 @@ const LoginModal = () => {
             border: '1px solid black',
             width: '400px',
             margin: '0 auto',
-            height: '400px'
+            height: '400px',
+            zIndex: '100'
           }
         }}
       >

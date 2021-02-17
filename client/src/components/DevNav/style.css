@@ -6,3 +6,10 @@
 .logo {
   font-style: italic;
 }
+
+.createAccount {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

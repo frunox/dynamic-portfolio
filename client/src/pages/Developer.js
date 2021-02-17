@@ -6,11 +6,13 @@ import DevContainer from '../components/DevContainer'
 import DevTable from '../components/DevTable';
 import LoginModal from '../components/LoginForm/LoginModal'
 import LogoutModal from '../components/LogoutForm/LogoutModal'
+// import SettingsModal from '../components/Settings/SettingsModal'
+
 import SetupContext from '../contexts/SetupContext';
 import "./developer.css";
 
 function Developer() {
-  // const setupCtx = useContext(SetupContext)
+  const setupCtx = useContext(SetupContext)
   const [, setState] = useState()
 
   let login = localStorage.getItem("jtsy-login");
@@ -20,6 +22,8 @@ function Developer() {
     setState({})
   }, [login])
 
+  let openModal = setupCtx.state.settingsModalOpen;
+  let isLoggedIn = JSON.parse(localStorage.getItem('jtsy-login'))
 
   return (
     <div className="devPage">

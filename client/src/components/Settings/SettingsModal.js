@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
+import { Button } from "semantic-ui-react";
 import API from "../../utils/API";
 import DevDataContext from "../../contexts/DevDataContext";
 import SetupContext from "../../contexts/SetupContext";
@@ -11,7 +12,7 @@ import { set } from "mongoose";
 
 Modal.setAppElement(document.getElementById('root'))
 
-const SettingsComp = () => {
+const SettingsModal = () => {
   const devCtx = useContext(DevDataContext);
   console.log("SETTINGS devCtx", devCtx.state, typeof devCtx.state)
 
@@ -38,7 +39,7 @@ const SettingsComp = () => {
 
   // console.log('Settings settings', settings)
   let openModal = setupCtx.state.settingsModalOpen;
-  let isLoggedIn = JSON.parse(localStorage.getItem('jtsy-login'));
+  let isLoggedIn = JSON.parse(localStorage.getItem('jtsy-login'))
 
   useEffect(() => {
     setState(settings)
@@ -74,7 +75,8 @@ const SettingsComp = () => {
   };
 
   const logInHandler = () => {
-    setupCtx.openSettingsModal(false);
+    // setupCtx.openSettingsModal(false);
+    console.log('SETTINGSModal loginHandler')
     setState({
       ...state,
       login: true
@@ -94,9 +96,9 @@ const SettingsComp = () => {
               borderRadius: '10px',
               top: '90px',
               border: '1px solid black',
-              width: '600px',
+              width: '500px',
               margin: '0 auto',
-              height: '397px'
+              height: '450px'
             }
           }}
         >
@@ -157,6 +159,12 @@ const SettingsComp = () => {
               </div>)
             }
           </form>
+          {!isLoggedIn &&
+            (
+              <div className="createAccount">
+                <Button color="red" type="submit" onClick={logInHandler}>Log In to Change Settings</Button>
+              </div>
+            )}
         </Modal>
       </div>
 
@@ -165,4 +173,4 @@ const SettingsComp = () => {
   return content;
 }
 
-export default SettingsComp;
+export default SettingsModal;
