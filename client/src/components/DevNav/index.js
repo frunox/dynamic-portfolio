@@ -25,7 +25,8 @@ const DevNav = () => {
     login: false
   }
 
-  let openModal = setupCtx.state.settingsModalOpen;
+  let openSettings = setupCtx.state.settingsModalOpen;
+  let openSync = setupCtx.state.syncModalOpen;
   const isLoggedIn = JSON.parse(localStorage.getItem("jtsy-login"));
   console.log('DEVNAV isloggedIn', isLoggedIn)
   useEffect(() => {
@@ -88,6 +89,10 @@ const DevNav = () => {
     setupCtx.openSettingsModal(true)
   }
 
+  const openSyncModal = () => {
+    setupCtx.openSyncModal(true)
+  }
+
   let content = (
     <div>
       <Menu inverted stackable fixed="top" className="menu">
@@ -110,15 +115,19 @@ const DevNav = () => {
             <Menu.Item name="login" onClick={openLoginModal}>
             </Menu.Item>
           ) : (
-              <Menu.Item name="logout" onClick={openLogoutModal}>
-              </Menu.Item>
+              <React.Fragment>
+                <Menu.Item name="re-sync" onClick={openSyncModal}>
+                </Menu.Item>
+                <Menu.Item name="logout" onClick={openLogoutModal}>
+                </Menu.Item>
+              </React.Fragment>
             )
           }
 
         </Menu.Menu>
       </Menu>
 
-      <Modal isOpen={openModal} onRequestClose={() => setupCtx.openSettingsModal(false)}
+      <Modal isOpen={openSettings} onRequestClose={() => setupCtx.openSettingsModal(false)}
         style={{
           overlay: {
             backgroundColor: 'rgba(155, 155, 155, 0.5)'
@@ -197,6 +206,23 @@ const DevNav = () => {
               <Button color="red" type="submit" onClick={logInHandler}>Log In to Change Settings</Button>
             </div>
           )}
+      </Modal>
+      <Modal isOpen={openSync} onRequestClose={() => setupCtx.openSyncModal(false)}
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(155, 155, 155, 0.5)'
+          },
+          content: {
+            borderRadius: '10px',
+            top: '90px',
+            border: '1px solid black',
+            width: '500px',
+            margin: '0 auto',
+            height: '440px'
+          }
+        }}
+      >
+        <h1>Sync GitHub Repositories</h1>
       </Modal>
     </div >
   )
