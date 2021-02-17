@@ -26,7 +26,7 @@ const DevNav = () => {
   }
 
   let openModal = setupCtx.state.settingsModalOpen;
-  const isLoggedIn = localStorage.getItem("jtsy-login");
+  const isLoggedIn = JSON.parse(localStorage.getItem("jtsy-login"));
   console.log('DEVNAV isloggedIn', isLoggedIn)
   useEffect(() => {
     console.log('DEVNAV useEffect isLoggedIn', isLoggedIn)
@@ -106,7 +106,7 @@ const DevNav = () => {
           <Menu.Item as="a" icon="setting" onClick={openSettingsModal}>
           </Menu.Item>
 
-          {isLoggedIn === 'false' ? (
+          {!isLoggedIn ? (
             <Menu.Item name="login" onClick={openLoginModal}>
             </Menu.Item>
           ) : (
