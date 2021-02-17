@@ -62,7 +62,6 @@ const LoginModal = () => {
 
   const goBack = () => {
     setupCtx.openLoginModal(false);
-    setState({ ...state })
     history.replace('/developer')
   }
 
