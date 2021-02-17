@@ -74,11 +74,10 @@ const LogoutModal = () => {
           content: {
             borderRadius: '10px',
             top: '90px',
-            // bottom: '30%',
-            height: '275px',
             border: '1px solid black',
             width: '400px',
-            margin: 'auto'
+            margin: '0 auto',
+            height: '275px',
           }
         }}
       >

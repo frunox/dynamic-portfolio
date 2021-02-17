@@ -76,12 +76,10 @@ const LoginModal = () => {
           content: {
             borderRadius: '10px',
             top: '90px',
-            left: '25%',
-            right: '25%',
-            bottom: '30%',
             border: '1px solid black',
             width: '400px',
-            margin: 'auto'
+            margin: '0 auto',
+            height: '400px'
           }
         }}
       >
