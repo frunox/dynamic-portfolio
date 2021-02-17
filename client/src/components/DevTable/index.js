@@ -47,6 +47,7 @@ const DevTable = () => {
   tableData = devCtx.state.repositories;
 
   let openModal = setupCtx.state.repoModalOpen;
+  let isLoggedIn = JSON.parse(localStorage.getItem('jtsy-login'))
   console.log('DEVTABLE openModal', openModal)
 
   useEffect(() => {
@@ -59,35 +60,6 @@ const DevTable = () => {
     })
   }, [tableData])
 
-
-  // useEffect(() => {
-  //   console.log('DevTable 1.  in useEffect updateDev', setupCtx.state.updateDev)
-  //   if (false) {
-  //     API.getActiveDevData()
-  //       .then(res => {
-  //         // console.log('DevTable 2. ')
-  //         setState({
-  //           ...state,
-  //           data: res.data.repositories,
-  //           filteredRepos: res.data.repositories,
-  //         });
-  //         tableData = res.data.repositories
-  //         console.log('DEVTABLE useEffect tableData', tableData)
-  //         const developerData = {
-  //           repositories: tableData,
-  //         }
-  //         devCtx.updateDev(developerData);
-  //       });
-  //   } else {
-  //     console.log('DEVTABLE else devCtx', devCtx)
-  //     const repos = devCtx.state.repositories;
-  //     setState({
-  //       ...state,
-  //       data: repos,
-  //       filteredRepos: repos
-  //     })
-  //   }
-  // }, []);
 
   const handleSort = (clickedColumn) => () => {
     const { column, filteredRepos, direction } = state;
@@ -208,6 +180,8 @@ const DevTable = () => {
   };
 
   const logInHandler = () => {
+    setupCtx.openRepoModal(false);
+    console.log('DEVTABLE logInHandler')
     setState({
       ...state,
       login: true
@@ -278,26 +252,10 @@ const DevTable = () => {
                 border: '1px solid black',
                 width: '600px',
                 margin: '0 auto',
-                height: '395px'
+                height: '397px'
               }
             }}
           >
-            {!setupCtx.state.loggedIn && (
-              <div>
-                <h1>You must be logged in to change settings</h1>
-                <form onSubmit={logInHandler}>
-                  <div className="createAccount">
-                    <button type="submit" onClick={logInHandler}>Log In</button>
-                  </div>
-                </form>
-              </div>
-            )
-            }
-            {
-              state.login && (
-                <Redirect to={'/login'} />
-              )
-            }
             <h1 className="modalHeader">Update Repository:  <span>{state.repoName}</span></h1>
             <form>
               <label className="inputLabel">Current Display Status: {state.activeFlag}</label>
@@ -305,18 +263,24 @@ const DevTable = () => {
                 className="inputLabel"
                 label='Display'
                 checked={state.activeFlag === 'true'}
-                onChange={() => updateFlag(state.rowClick)}
+                onChange={!isLoggedIn ? null : () => updateFlag(state.rowClick)}
               />
               <hr />
             </form>
             <form onSubmit={(event) => handleLinkUpdate(event)}>
-              <label className='inputLabel' Name="inputLabel">Current Deployment Link:</label>
-              <input className="urlBox" name="deploymentLink" placeholder={state.deploymentLink} value={state.value} onChange={(event) => handleLinkChange(event)} />
-              <label className="inputLabel">Current Image Link</label>
-              <input className="urlBox" name="imageLink" placeholder={state.imageLink} value={state.value} onChange={(event) => handleLinkChange(event)} />
-              <label className="inputLabel">Add Keywords</label>
-              <input className="urlBox" name="keywords" label='Keywords: ' placeholder={state.keywords} value={state.value} onChange={(event) => handleLinkChange(event)} />
-              {setupCtx.state.loggedIn && (
+              <div>
+                <label className='inputLabel' name="inputLabel">Current Deployment Link:</label>
+                <input className="urlBox" name="deploymentLink" placeholder={state.deploymentLink} value={state.value} onChange={!isLoggedIn ? null : (event) => handleLinkChange(event)} />
+              </div>
+              <div>
+                <label className="inputLabel">Current Image Link</label>
+                <input className="urlBox" name="imageLink" placeholder={state.imageLink} value={state.value} onChange={!isLoggedIn ? null : (event) => handleLinkChange(event)} />
+              </div>
+              <div>
+                <label className="inputLabel">Add Keywords</label>
+                <input className="urlBox" name="keywords" label='Keywords: ' placeholder={state.keywords} value={state.value} onChange={!isLoggedIn ? null : (event) => handleLinkChange(event)} />
+              </div>
+              {isLoggedIn && (
                 <Button color="teal" fluid active
                   type="submit"
                 >
@@ -324,6 +288,12 @@ const DevTable = () => {
                 </Button>
               )}
             </form>
+            {!isLoggedIn &&
+              (
+                <div className="createAccount">
+                  <Button color="red" type="submit" onClick={logInHandler}>Log In to Change Settings</Button>
+                </div>
+              )}
           </Modal>
         </Container>
       </div>

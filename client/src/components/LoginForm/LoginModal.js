@@ -44,9 +44,12 @@ const LoginModal = () => {
     // history.length > 0 ? history.replace('/developer') : history.replace('/developer');
     // history.goBack();
     // history.replace('/developer')
-    history.push("/developer")
+    // history.push("/developer")
     setupCtx.updateLoggedIn();
     setupCtx.openLoginModal(false);
+    // if (setupCtx.state.repoModalOpen) {
+    //   setupCtx.openRepoModal(false)
+    // }
   };
 
   const handleChange = (e) => {
@@ -59,6 +62,7 @@ const LoginModal = () => {
 
   const goBack = () => {
     setupCtx.openLoginModal(false);
+    setState({ ...state })
     history.replace('/developer')
   }
 
