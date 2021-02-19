@@ -41,17 +41,40 @@ const DevTable = () => {
     searched: -1,
     searchID: null,
     keywords: "",
-    login: false
+    login: false,
+    resync: 0,
   })
 
   tableData = devCtx.state.repositories;
-
+  console.log('tableDATA', tableData)
   let openModal = setupCtx.state.repoModalOpen;
   let isLoggedIn = JSON.parse(localStorage.getItem('jtsy-login'))
-  console.log('DEVTABLE openModal', openModal)
+  // devDataContext variable for re-loading
+  let sync = JSON.parse(localStorage.getItem('dynamic-sync'))
+  console.log('sync in DEVTABLE', sync)
+  if (sync) {
+    setState({
+      ...state,
+      resync: sync
+    })
+    localStorage.setItem('dynamic-sync', 'false')
+    console.log("KFDLF DEVTable useEffect setState")
+  }
 
   useEffect(() => {
-    // console.log('DEVTABLE devCtx', devCtx)
+    console.log('devTable useEffect for SYNC', sync)
+    setState({
+      ...state,
+      resync: state.resync + 1
+    })
+    setupCtx.updateSync(false)
+  }, [sync])
+
+
+  console.log('DEVTABLE openModal', openModal, 'resync', state.resync)
+
+  useEffect(() => {
+    console.log('DEVTABLE useEffect tableData')
 
     setState({
       ...state,

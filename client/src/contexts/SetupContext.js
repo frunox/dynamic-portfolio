@@ -13,6 +13,8 @@ export const SetupProvider = (props) => {
         logoutModalOpen: false,
         repoModalOpen: false,
         settingsModalOpen: false,
+        syncModalOpen: false,
+        sync: false,
         lastPage: ""
     });
 
@@ -64,6 +66,19 @@ export const SetupProvider = (props) => {
                         settingsModalOpen: value
                     })
                 },
+                openSyncModal: (value) => {
+                    console.log('setupCtx openSyncModal', value)
+                    setState({
+                        ...state,
+                        syncModalOpen: value
+                    })
+                }, updateSync: (value) => {
+                    setState({
+                        ...state,
+                        sync: value
+                    })
+                },
+
                 setLastPage: (value) => {
                     // console.log('setupCtx setLastPage', value, typeof value)
                     setState({

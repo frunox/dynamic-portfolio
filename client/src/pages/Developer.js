@@ -15,15 +15,16 @@ function Developer() {
   const setupCtx = useContext(SetupContext)
   const [, setState] = useState()
 
-  let login = localStorage.getItem("jtsy-login");
+  let sync = localStorage.getItem("dynamic-sync");
+  console.log('== Developer sync', sync)
 
   useEffect(() => {
-    // console.log("DEVELOPER useEffect", login)
+    console.log("DEVELOPER useEffect", sync)
     setState({})
-  }, [login])
+    localStorage.setItem('dynamic-sync', 'false')
+  }, [sync])
 
-  let openModal = setupCtx.state.settingsModalOpen;
-  let isLoggedIn = JSON.parse(localStorage.getItem('jtsy-login'))
+  // let isLoggedIn = JSON.parse(localStorage.getItem('jtsy-login'))
 
   return (
     <div className="devPage">

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Modal from 'react-modal';
-import { Menu, Button } from 'semantic-ui-react';
 import API from "../../utils/API";
+import { Menu, Button } from 'semantic-ui-react';
 import DevDataContext from '../../contexts/DevDataContext'
 import SetupContext from '../../contexts/SetupContext';
 import "./style.css";
@@ -9,9 +9,16 @@ import "./style.css";
 Modal.setAppElement(document.getElementById('root'))
 
 const DevNav = () => {
-  let [state, setState] = useState({})
+  let [state, setState] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    linkedInLink: "",
+    resumeLink: "",
+  })
   const devCtx = useContext(DevDataContext)
   const setupCtx = useContext(SetupContext)
+  console.log('DEVNAV setupCtx', setupCtx.state)
 
   let settings = {
     developerLoginName: devCtx.state.developerLoginName,
@@ -26,6 +33,7 @@ const DevNav = () => {
   }
 
   let openModal = setupCtx.state.settingsModalOpen;
+  let openSync = setupCtx.state.syncModalOpen;
   const isLoggedIn = JSON.parse(localStorage.getItem("jtsy-login"));
   console.log('DEVNAV isloggedIn', isLoggedIn)
   useEffect(() => {
@@ -47,11 +55,18 @@ const DevNav = () => {
       linkedInLink: state.linkedInLink,
       resumeLink: state.resumeLink,
     }
+    localStorage.setItem('dynamic-fname', revDevData.fname);
+    localStorage.setItem('dynamic-lname', revDevData.lname);
     console.log('in Settings: call updateDeveloper', revDevData.developerGithubID)
     API.revDeveloper(revDevData)
     setupCtx.updateDevUpdated(true);
     setState({
       ...state,
+      fname: revDevData.fname,
+      lname: revDevData.lname,
+      email: revDevData.email,
+      linkedInLink: revDevData.linkedInLink,
+      resumeLink: revDevData.resumeLink,
       redirect: true,
     })
     setupCtx.openSettingsModal(false)
@@ -88,10 +103,36 @@ const DevNav = () => {
     setupCtx.openSettingsModal(true)
   }
 
+  const openSyncModal = () => {
+    setupCtx.openSyncModal(true)
+  }
+
+  const reSync = () => {
+    setupCtx.updateSync(true);
+    localStorage.setItem('dynamic-sync', 'true');
+    setupCtx.openSyncModal(false)
+    console.log('DEVNAV Sync')
+    const developerData = {
+      developerLoginName: devCtx.state.developerLoginName,
+      developerGithubID: " ",
+      repositories: [],
+      fname: devCtx.state.fname,
+      lname: devCtx.state.lname,
+      email: devCtx.state.email,
+      linkedInLink: devCtx.state.linkedInLink,
+      resumeLink: devCtx.state.resumeLink,
+      active: true
+    }
+    console.log('DEVNAV developerData', developerData);
+    API.deleteDeveloper();
+    API.updateDeveloper(developerData)
+    API.getsync(developerData.developerLoginName)
+  }
+
   let content = (
     <div>
       <Menu inverted stackable fixed="top" className="menu">
-        <Menu.Item header className="logo">{devCtx.state.fname} {devCtx.state.lname}</Menu.Item>
+        <Menu.Item header className="logo">{localStorage.getItem('dynamic-fname')} {localStorage.getItem('dynamic-lname')}</Menu.Item>
         <Menu.Menu position="left">
           <Menu.Item as="a" href="/" name="home">
           </Menu.Item>
@@ -110,8 +151,12 @@ const DevNav = () => {
             <Menu.Item name="login" onClick={openLoginModal}>
             </Menu.Item>
           ) : (
-              <Menu.Item name="logout" onClick={openLogoutModal}>
-              </Menu.Item>
+              <React.Fragment>
+                <Menu.Item name="sync" onClick={openSyncModal}>
+                </Menu.Item>
+                <Menu.Item name="logout" onClick={openLogoutModal}>
+                </Menu.Item>
+              </React.Fragment>
             )
           }
 
@@ -197,6 +242,27 @@ const DevNav = () => {
               <Button color="red" type="submit" onClick={logInHandler}>Log In to Change Settings</Button>
             </div>
           )}
+      </Modal>
+
+      <Modal isOpen={openSync} onRequestClose={() => setupCtx.openSyncModal(false)}
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(155, 155, 155, 0.5)'
+          },
+          content: {
+            borderRadius: '10px',
+            top: '90px',
+            border: '1px solid black',
+            width: '500px',
+            margin: '0 auto',
+            height: '440px'
+          }
+        }}
+      >
+        <h1>Re-Sync Repositories</h1>
+        <div className="createAccount">
+          <Button color="blue" type="submit" onClick={reSync}>Sync</Button>
+        </div>
       </Modal>
     </div >
   )
