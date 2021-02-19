@@ -47,6 +47,8 @@ const DevNav = () => {
       linkedInLink: state.linkedInLink,
       resumeLink: state.resumeLink,
     }
+    localStorage.setItem('dynamic-fname', revDevData.fname);
+    localStorage.setItem('dynamic-lname', revDevData.lname);
     console.log('in Settings: call updateDeveloper', revDevData.developerGithubID)
     API.revDeveloper(revDevData)
     setupCtx.updateDevUpdated(true);
@@ -91,7 +93,7 @@ const DevNav = () => {
   let content = (
     <div>
       <Menu inverted stackable fixed="top" className="menu">
-        <Menu.Item header className="logo">{devCtx.state.fname} {devCtx.state.lname}</Menu.Item>
+        <Menu.Item header className="logo">{localStorage.getItem('dynamic-fname')} {localStorage.getItem('dynamic-lname')}</Menu.Item>
         <Menu.Menu position="left">
           <Menu.Item as="a" href="/" name="home">
           </Menu.Item>
