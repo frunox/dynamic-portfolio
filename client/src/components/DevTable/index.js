@@ -1,11 +1,9 @@
 // import axios from "axios";
 import _ from "lodash";
 import React, { useState, useEffect, useContext, Fragment } from "react";
-import Spinner from '../Spinner';
-import { Redirect } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
-import { Table, Button, Container, Checkbox } from "semantic-ui-react";
+import { Table, Button, Container, Checkbox, List } from "semantic-ui-react";
 import DevDataContext from '../../contexts/DevDataContext';
 import SetupContext from '../../contexts/SetupContext';
 import API from "../../utils/API";
@@ -313,13 +311,17 @@ const DevTable = () => {
                 borderRadius: '10px',
                 top: '90px',
                 border: '1px solid black',
-                width: '600px',
+                width: '500px',
                 margin: '0 auto',
-                height: '397px'
+                height: '387px'
               }
             }}
           >
-            <h1 className="modalHeader">Update Repository:  <span>{state.repoName}</span></h1>
+            <h1 className="modalHeader">Update Repository: <span>{state.repoName}</span></h1>
+            <List as="ul" bulleted inverted className="bList">
+              <List.Item as="li">Enter the project description and website in GitHub.</List.Item>
+              <List.Item as="li">Image width/height ratio should be 3:2.</List.Item>
+            </List>
             <form>
               <label className="inputLabel">Current Display Status: {state.activeFlag}</label>
               <Checkbox
@@ -332,15 +334,11 @@ const DevTable = () => {
             </form>
             <form onSubmit={(event) => handleLinkUpdate(event)}>
               <div>
-                <label className='inputLabel' name="inputLabel">Current Deployment Link:</label>
-                <input className="urlBox" name="deploymentLink" placeholder={state.deploymentLink} value={state.value} onChange={!isLoggedIn ? null : (event) => handleLinkChange(event)} />
-              </div>
-              <div>
                 <label className="inputLabel">Current Image Link</label>
                 <input className="urlBox" name="imageLink" placeholder={state.imageLink} value={state.value} onChange={!isLoggedIn ? null : (event) => handleLinkChange(event)} />
               </div>
               <div>
-                <label className="inputLabel">Add Keywords</label>
+                <label className="inputLabel">Search Keywords</label>
                 <input className="urlBox" name="keywords" label='Keywords: ' placeholder={state.keywords} value={state.value} onChange={!isLoggedIn ? null : (event) => handleLinkChange(event)} />
               </div>
               {isLoggedIn && (

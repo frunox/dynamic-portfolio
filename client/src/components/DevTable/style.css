@@ -53,6 +53,10 @@ body {
 
 /* // MODAL */
 
+.modalText {
+  text-align: center;
+}
+
 .ui.modal {
   position: relative;
   height: auto;
