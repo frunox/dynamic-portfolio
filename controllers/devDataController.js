@@ -15,7 +15,7 @@ module.exports = {
           return res.json(err);
         } else {
           // console.log('dbDeveloper in devDataController ', dbDeveloper.developerGithubID)
-          // console.log('devDataController repositories', dbDeveloper.repositories.length)
+          console.log('devDataController repositories', dbDeveloper.repositories.length)
           return res.json(dbDeveloper);
         }
       });

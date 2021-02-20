@@ -18,7 +18,7 @@ const DevNav = () => {
   })
   const devCtx = useContext(DevDataContext)
   const setupCtx = useContext(SetupContext)
-  console.log('DEVNAV setupCtx', setupCtx.state)
+  // console.log('DEVNAV setupCtx', setupCtx.state)
 
   let settings = {
     developerLoginName: devCtx.state.developerLoginName,
@@ -35,9 +35,9 @@ const DevNav = () => {
   let openModal = setupCtx.state.settingsModalOpen;
   let openSync = setupCtx.state.syncModalOpen;
   const isLoggedIn = JSON.parse(localStorage.getItem("jtsy-login"));
-  console.log('DEVNAV isloggedIn', isLoggedIn)
+  // console.log('DEVNAV isloggedIn', isLoggedIn)
   useEffect(() => {
-    console.log('DEVNAV useEffect isLoggedIn', isLoggedIn)
+    // console.log('DEVNAV useEffect isLoggedIn', isLoggedIn)
     setState(settings)
   }, [devCtx.state])
 
@@ -45,7 +45,7 @@ const DevNav = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("in Settings handleSubmit", devCtx.state.fname);
+    // console.log("in Settings handleSubmit", devCtx.state.fname);
     const revDevData = {
       developerLoginName: devCtx.state.developerLoginName,
       developerGithubID: devCtx.state.developerGithubID,
@@ -107,11 +107,11 @@ const DevNav = () => {
     setupCtx.openSyncModal(true)
   }
 
-  const reSync = () => {
+  const reSync = async () => {
     setupCtx.updateSync(true);
     localStorage.setItem('dynamic-sync', 'true');
     setupCtx.openSyncModal(false)
-    console.log('DEVNAV Sync')
+    // console.log('DEVNAV Sync')
     const developerData = {
       developerLoginName: devCtx.state.developerLoginName,
       developerGithubID: " ",
@@ -124,9 +124,43 @@ const DevNav = () => {
       active: true
     }
     console.log('DEVNAV developerData', developerData);
-    API.deleteDeveloper();
-    API.updateDeveloper(developerData)
-    API.getsync(developerData.developerLoginName)
+    await API.deleteDeveloper()
+      .then(() => {
+        console.log('reSync 1 - deleteDeveloper', developerData)
+        API.updateDeveloper(developerData)
+        return developerData.developerLoginName
+      })
+      .then((loginName) => {
+        console.log('reSync 2 - call getsync')
+        API.getsync(loginName);
+      })
+      .catch((err) => console.log(err));
+    getNewDevData()
+  }
+
+  const getNewDevData = () => {
+    function getData() {
+      console.log('reSync 3 - pause')
+      console.log('reSync 4 - call activeDevData')
+      API.getActiveDevData()
+        .then((activeDevData) => {
+          const newDevData = {
+            developerLoginName: activeDevData.data.developerLoginName,
+            developerGithubID: activeDevData.data.developerGithubID,
+            repositories: activeDevData.data.repositories,
+            fname: activeDevData.data.fname,
+            lname: activeDevData.data.lname,
+            email: activeDevData.data.email,
+            linkedInLink: activeDevData.data.linkedInLink,
+            resumeLink: activeDevData.data.resumeLink,
+            active: true
+          }
+          console.log('reSync 5 - newDevData', newDevData)
+          devCtx.updateDev(newDevData)
+        })
+        .catch((err) => console.log(err));
+    }
+    setTimeout(getData, 20000)
   }
 
   let content = (

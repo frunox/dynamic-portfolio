@@ -13,13 +13,15 @@ import './style.css'
 
 Modal.setAppElement(document.getElementById('root'))
 
-var tableData = []
-var filteredList = []
+// var tableData = []
+// var filteredList = []
 
 const DevTable = () => {
   const devCtx = useContext(DevDataContext)
-  const repos = devCtx.state.repositories;
-  // console.log('DEVTABLE devCtx', devCtx, 'repos', repos)
+  let tableData = devCtx.state.repositories;
+  let filteredList = tableData;
+  console.log('DEVTABLE devCtx', devCtx.state)
+  let dLink;
 
   const setupCtx = useContext(SetupContext);
   // console.log('DEVTABLE setupCtx', setupCtx)
@@ -45,30 +47,64 @@ const DevTable = () => {
     resync: 0,
   })
 
-  tableData = devCtx.state.repositories;
-  console.log('tableDATA', tableData)
+  // setState({
+  //   ...state,
+  //   data: tableData,
+  //   filteredRepos: tableData
+  // })
   let openModal = setupCtx.state.repoModalOpen;
   let isLoggedIn = JSON.parse(localStorage.getItem('jtsy-login'))
   // devDataContext variable for re-loading
   let sync = JSON.parse(localStorage.getItem('dynamic-sync'))
   console.log('sync in DEVTABLE', sync)
-  if (sync) {
-    setState({
-      ...state,
-      resync: sync
-    })
-    localStorage.setItem('dynamic-sync', 'false')
-    console.log("KFDLF DEVTable useEffect setState")
-  }
 
-  useEffect(() => {
-    console.log('devTable useEffect for SYNC', sync)
-    setState({
-      ...state,
-      resync: state.resync + 1
-    })
-    setupCtx.updateSync(false)
-  }, [sync])
+  // useEffect(() => {
+  //   console.log('DEVTABLE useEffect call getActiveDevData')
+  //   API.getActiveDevData().then((activeDevData) => {
+  //     console.log('%%%%% DevTable activeDevData', activeDevData.data);
+
+  //     const developerData = {
+  //       developerLoginName: activeDevData.data.developerLoginName,
+  //       developerGithubID: activeDevData.data.developerGithubID,
+  //       repositories: activeDevData.data.repositories,
+  //       fname: activeDevData.data.fname,
+  //       lname: activeDevData.data.lname,
+  //       email: activeDevData.data.email,
+  //       linkedInLink: activeDevData.data.linkedInLink,
+  //       resumeLink: activeDevData.data.resumeLink,
+  //       active: true
+  //     }
+  //     devCtx.updateDev(developerData)
+  //     tableData = developerData.repositories;
+  //     filteredList = developerData.repositories;
+  //     // setState({
+  //     //   ...state,
+  //     //   data: tableData,
+  //     //   filteredRepos: tableData
+  //     // })
+  //   })
+  // }, [sync])
+
+  console.log('tableData', tableData)
+  console.log('filteredList', filteredList)
+
+  // if (sync) {
+  //   setState({
+  //     ...state,
+  //     resync: sync
+  //   })
+  //   localStorage.setItem('dynamic-sync', 'false')
+  //   console.log("KFDLF DEVTable setState sync=true")
+  // }
+
+  // useEffect(() => {
+  //   console.log('devTable useEffect for SYNC', sync)
+  //   setState({
+  //     ...state,
+  //     resync: state.resync + 1
+  //   })
+  //   setupCtx.updateSync(false)
+  // }, [sync])
 
 
   console.log('DEVTABLE openModal', openModal, 'resync', state.resync)
@@ -181,7 +217,8 @@ const DevTable = () => {
   const showDevRepo = (repo) => {
     // console.log('clicked', repo)
     let id = tableData.findIndex(e => e.repoID === repo)
-    // console.log('id: ', id, 'deployLink: ', tableData[id].deploymentLink)
+    dLink = tableData[id].deploymentLink
+    console.log('showDevRepo id: ', id, 'deployLink: ', tableData[id].deploymentLink, 'dLink', dLink, 'desc', tableData[id].repoDesc)
     // console.log(tableData[id]._id, 'imageLink: ', tableData[id].imageLink)
     if (state.deploymentLink !== "") {
       tableData[id].deploymentLink = state.deploymentLink;
@@ -249,6 +286,7 @@ const DevTable = () => {
             </Table.Row>
           </Table.Header>
           <Table.Body>
+            {console.log('in Table filteredRepos', filteredRepos)}
             {_.map(
               filteredRepos,
               ({ repoDesc, activeFlag, repoName, repoID }, index) => (

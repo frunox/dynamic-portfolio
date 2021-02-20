@@ -57,10 +57,10 @@ const App = () => {
       if (localStorage.getItem('jtsy-login') === 'true') {
         setupCtx.updateLoggedIn();
       }
-      // console.log('APP devUpdated', setupCtx.state.devUpdated)
+      console.log('APP devUpdated', setupCtx.state.devUpdated)
       if (setupCtx.state.devUpdated) {
         API.getActiveDevData().then((activeDevData) => {
-          // console.log('APP activeDevData', activeDevData.data);
+          console.log('APP activeDevData', activeDevData.data);
 
           const developerData = {
             developerLoginName: activeDevData.data.developerLoginName,
@@ -73,7 +73,7 @@ const App = () => {
             resumeLink: activeDevData.data.resumeLink,
             active: true
           }
-          // console.log('APP after DB call', developerData)
+          console.log('APP after DB call', developerData)
           // update dev context with current user
           devCtx.updateDev(developerData)
           setupCtx.updateInitialized();
@@ -81,7 +81,7 @@ const App = () => {
         })
       }
     };
-  }, [setupCtx.state.devUpdated])
+  }, [])
 
   // console.log('APP initialized', initialized)
 
