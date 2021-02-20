@@ -37,6 +37,7 @@ const CreateAccountComp = (props) => {
     localStorage.setItem('jtsy-password', hash);
     localStorage.setItem('jtsy-signin', "true");
     localStorage.setItem('jtsy-login', "false");
+    localStorage.setItem('dynamic-sync', 'false');
     // {developerLoginName: "frunox"}, {$set: {lname: "Black", fname: "Bob"}}
     console.log('CAC state.githubID', state.githubID)
     API.getsync(state.githubID);
@@ -59,6 +60,8 @@ const CreateAccountComp = (props) => {
     localStorage.setItem('dynamic-fname', developerData.fname);
     localStorage.setItem('dynamic-lname', developerData.lname);
     console.log('in createAcctComp: call updateDeveloper', developerData);
+    localStorage.setItem('dynamic-fname', developerData.fname);
+    localStorage.setItem('dynamic-lname', developerData.lname);
     devDataCtx.updateDev(developerData);
     API.updateDeveloper(developerData);
     console.log('CAC devDataCtx', devDataCtx)

@@ -38,7 +38,9 @@ async function updateDevDB(developerLoginName) {
     // .then((gitHubData) => {})
     // gitHubData is all of the github info
     .then((data) => {
-      gitHubData = data;
+      console.log('12. GitHub data', data.data[0].name)
+      // gitHubData is the array of repos (which are objects)
+      gitHubRepos = data.data;
     })
     // Find the developers github login in our database.
     .then(() => {
@@ -47,42 +49,43 @@ async function updateDevDB(developerLoginName) {
     // Take the devData (the existing data in db.developers) and gitHubData and call loadDB to synch Databases.
     .then((devData) => {
       // console.log('calling loadDB devData: ', devData.developerGithubID)
-      loadDB(developerLoginName, devData, gitHubData.data);
+      loadDB(developerLoginName, devData, gitHubRepos);
     })
     .catch((err) => console.log(err));
 }
 
-function loadDB(developerLoginName, devData, gitHubData) {
+async function loadDB(developerLoginName, devData, gitHubRepos) {
   //  If there is no github data then return (TODO: Ask about sending errors.  This will be needed for initialization)
   console.log('13. in loadDB, successfully calls updateRepo')
-  if (!gitHubData) {
+  if (!gitHubRepos) {
     return res.json("Github user not found");
   } else {
     // If there is no devData (the user was not found in our database), set them up and insert the data.
     //  Here is where we will add new data needed from the github repository.
     // if (!devData) {
     //NOTE: I had the line " let devData = {..." before initializing devData with a "let" statement. HOWEVER, I only had access to this this variable inside the scope of he function...  I learned this the hard way!
-    let userId = gitHubData.findIndex(e => e.owner.login === developerLoginName)
+    let userId = gitHubRepos.findIndex(e => e.owner.login === developerLoginName)
     console.log('13a. id: ', userId)
-    const developerGithubID = gitHubData[userId].owner.id
+    const developerGithubID = gitHubRepos[userId].owner.id
 
     console.log('13b. in loadDB: ', developerLoginName, developerGithubID)
     // db.Developer.updateOne({ developerLoginName: developerLoginName }, { $set: { developerGithubID: "60527588" } });
     // }
     var githubRepoArray = [];
-    console.log('utilC, gitHubData: ', gitHubData.length)
+    console.log('utilC, gitHubRepos array length: ', gitHubRepos.length)
     // Loop through each github repository item and load all new records.
-    gitHubData.forEach((repo) => {
+    gitHubRepos.forEach((repo) => {
       // console.log('at push: ', repo.id)
       // const devID = developerGithubID
       // console.log('devID:  ', devData.developerGithubID)
+      // githubRepoArray is an array of the id's of all the repos
       githubRepoArray.push(repo.id);
-      console.log('13c. call updateRepo')
+      console.log('13c. call updateRepo', repo.name)
       updateRepo(repo, developerGithubID);
     });
     // console.log('githubRepoArray: ', githubRepoArray)
     // console.log(devData._id)
-    db.Developer.findOneAndUpdate(
+    await db.Developer.findOneAndUpdate(
       { developerLoginName: developerLoginName },
       {
         $set: {
@@ -131,7 +134,7 @@ function archiveRepositories(devData, githubRepoArray) {
 }
 //  This will synch the two databases.
 async function updateRepo(repo, devID) {
-  console.log('14. in updateRepo: ', devID)
+  // console.log('14. in updateRepo: ', repo.name)
   // repo is each repo, devID is the user's github id
   // Set the repo.description to the repo name if it is null (This is a required field)
   if (!repo.description) {
@@ -150,6 +153,7 @@ async function updateRepo(repo, devID) {
     keywords: "",
     repoID: repo.id,
   };
+  console.log('14a. repo deploymentLink:', repoDevData.deploymentLink)
   // Check to see if there is a record in our database with the github repo id.
   await db.Repositories.findOne({ repoID: repo.id }).exec((err, repoData) => {
     // If there is not a record in our database then add it to the repository collection.
@@ -160,11 +164,11 @@ async function updateRepo(repo, devID) {
     if (!repoData) {
       // console.log('repoDevData', repoDevData)
       db.Repositories.insertMany(repoDevData).then((repoArray) => {
-        // We also need to add the repository id to the developer .
+        // push each repo id into the 'repositories' field in Developer
 
         // repoDevData is defined above, repoArray is = repoDevData.  devID is the user's github id.
-        // Push the repo _id from the repositories collection
-        // console.log('updateRepo, devID, repoArray: ', devID, repoArray)
+        // Push the repo mongo _id from the repositories collection
+        // console.log('14b. updateRepo, repoArray: ', repoArray)
 
         db.Developer.findOneAndUpdate(
           { developerGithubID: devID },

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Modal from 'react-modal';
-import { Menu, Button } from 'semantic-ui-react';
 import API from "../../utils/API";
+import { Menu, Button } from 'semantic-ui-react';
 import DevDataContext from '../../contexts/DevDataContext'
 import SetupContext from '../../contexts/SetupContext';
 import "./style.css";
@@ -9,9 +9,16 @@ import "./style.css";
 Modal.setAppElement(document.getElementById('root'))
 
 const DevNav = () => {
-  let [state, setState] = useState({})
+  let [state, setState] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    linkedInLink: "",
+    resumeLink: "",
+  })
   const devCtx = useContext(DevDataContext)
   const setupCtx = useContext(SetupContext)
+  // console.log('DEVNAV setupCtx', setupCtx.state)
 
   let settings = {
     developerLoginName: devCtx.state.developerLoginName,
@@ -26,10 +33,11 @@ const DevNav = () => {
   }
 
   let openModal = setupCtx.state.settingsModalOpen;
+  let openSync = setupCtx.state.syncModalOpen;
   const isLoggedIn = JSON.parse(localStorage.getItem("jtsy-login"));
-  console.log('DEVNAV isloggedIn', isLoggedIn)
+  // console.log('DEVNAV isloggedIn', isLoggedIn)
   useEffect(() => {
-    console.log('DEVNAV useEffect isLoggedIn', isLoggedIn)
+    // console.log('DEVNAV useEffect isLoggedIn', isLoggedIn)
     setState(settings)
   }, [devCtx.state])
 
@@ -37,7 +45,7 @@ const DevNav = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("in Settings handleSubmit", devCtx.state.fname);
+    // console.log("in Settings handleSubmit", devCtx.state.fname);
     const revDevData = {
       developerLoginName: devCtx.state.developerLoginName,
       developerGithubID: devCtx.state.developerGithubID,
@@ -54,6 +62,11 @@ const DevNav = () => {
     setupCtx.updateDevUpdated(true);
     setState({
       ...state,
+      fname: revDevData.fname,
+      lname: revDevData.lname,
+      email: revDevData.email,
+      linkedInLink: revDevData.linkedInLink,
+      resumeLink: revDevData.resumeLink,
       redirect: true,
     })
     setupCtx.openSettingsModal(false)
@@ -90,6 +103,68 @@ const DevNav = () => {
     setupCtx.openSettingsModal(true)
   }
 
+  const openSyncModal = () => {
+    setupCtx.openSyncModal(true)
+  }
+
+  const reSync = async () => {
+    setupCtx.updateSync(true);
+    localStorage.setItem('dynamic-sync', 'true');
+    setupCtx.openSyncModal(false)
+    // console.log('DEVNAV Sync')
+    const developerData = {
+      developerLoginName: devCtx.state.developerLoginName,
+      developerGithubID: " ",
+      repositories: [],
+      fname: devCtx.state.fname,
+      lname: devCtx.state.lname,
+      email: devCtx.state.email,
+      linkedInLink: devCtx.state.linkedInLink,
+      resumeLink: devCtx.state.resumeLink,
+      active: true
+    }
+    console.log('DEVNAV developerData', developerData);
+    await API.deleteDeveloper()
+      .then(() => {
+        console.log('reSync 1 - deleteDeveloper', developerData)
+        API.updateDeveloper(developerData)
+        return developerData.developerLoginName
+      })
+      .then((loginName) => {
+        console.log('reSync 2 - call getsync')
+        API.getsync(loginName);
+      })
+      .catch((err) => console.log(err));
+    getNewDevData()
+  }
+
+  const getNewDevData = () => {
+    function getData() {
+      console.log('reSync 3 - pause')
+      console.log('reSync 4 - call activeDevData')
+      API.getActiveDevData()
+        .then((activeDevData) => {
+          const newDevData = {
+            developerLoginName: activeDevData.data.developerLoginName,
+            developerGithubID: activeDevData.data.developerGithubID,
+            repositories: activeDevData.data.repositories,
+            fname: activeDevData.data.fname,
+            lname: activeDevData.data.lname,
+            email: activeDevData.data.email,
+            linkedInLink: activeDevData.data.linkedInLink,
+            resumeLink: activeDevData.data.resumeLink,
+            active: true
+          }
+          console.log('reSync 5 - newDevData', newDevData)
+          devCtx.updateDev(newDevData)
+        })
+        .catch((err) => console.log(err));
+      localStorage.setItem('dynamic-sync', 'false');
+
+    }
+    setTimeout(getData, 2000)
+  }
+
   let content = (
     <div>
       <Menu inverted stackable fixed="top" className="menu">
@@ -112,8 +187,12 @@ const DevNav = () => {
             <Menu.Item name="login" onClick={openLoginModal}>
             </Menu.Item>
           ) : (
-              <Menu.Item name="logout" onClick={openLogoutModal}>
-              </Menu.Item>
+              <React.Fragment>
+                <Menu.Item name="sync" onClick={openSyncModal}>
+                </Menu.Item>
+                <Menu.Item name="logout" onClick={openLogoutModal}>
+                </Menu.Item>
+              </React.Fragment>
             )
           }
 
@@ -199,6 +278,28 @@ const DevNav = () => {
               <Button color="red" type="submit" onClick={logInHandler}>Log In to Change Settings</Button>
             </div>
           )}
+      </Modal>
+
+      <Modal isOpen={openSync} onRequestClose={() => setupCtx.openSyncModal(false)}
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(155, 155, 155, 0.5)'
+          },
+          content: {
+            borderRadius: '10px',
+            top: '90px',
+            border: '1px solid black',
+            width: '350px',
+            margin: '0 auto',
+            height: '180px'
+          }
+        }}
+      >
+        <h1>Re-Sync Repositories</h1>
+        <p>Reload your repositories from GitHub and re-synchronize the to include any recent changes.</p>
+        <div className="createAccount">
+          <Button color="blue" type="submit" onClick={reSync}>Sync</Button>
+        </div>
       </Modal>
     </div >
   )

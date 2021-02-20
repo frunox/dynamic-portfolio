@@ -28,10 +28,10 @@ module.exports = {
     updateRepository(req.body);
   },
 
-  updateDeveloper: function (req, res) {
+  updateDeveloper: async function (req, res) {
     console.log('6f. in updateDeveloper', devData)
     if (devData) {
-      db.Repositories.updateOne(
+      await db.Repositories.updateOne(
         { developerLoginName: devData.developerLoginName },
         {
           $set: { lname: devData.lname, fname: devData.fname, email: devData.email },
@@ -64,9 +64,9 @@ module.exports = {
   },
 
   // delete all documents in developer and repositories collections
-  deleteDeveloper: function (req, res) {
+  deleteDeveloper: async function (req, res) {
     console.log('6h. in deleteDeveloper')
-    db.Developer.deleteMany({})
+    await db.Developer.deleteMany({})
       .then(() => {
         res.json(true);
       })
@@ -74,7 +74,7 @@ module.exports = {
         res.json('deleteDeveloper error', err);
       });
     // deleteRepositories();
-    db.Repositories.deleteMany({})
+    await db.Repositories.deleteMany({})
       .then(() => {
         console.log('repos deleted');
       })

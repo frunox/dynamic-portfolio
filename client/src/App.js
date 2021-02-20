@@ -18,7 +18,8 @@ import CreateAccountComp from "./components/CreateAccountcomp";
 const App = () => {
   const [state, setState] = useState(
     {
-      loggedIn: null
+      loggedIn: null,
+      sync: false
     }
   )
 
@@ -30,12 +31,17 @@ const App = () => {
   // console.log('APP devCtx', devCtx)
 
   let login = setupCtx.state.loggedIn;
+  let sync = setupCtx.state.sync;
   // console.log('APP login', login, 'state.loggedIn', state.loggedIn)
 
   useEffect(() => {
     // console.log("APP useEffect login", login, state.loggedIn)
-    setState({ loggedIn: login })
-  }, [login])
+    setState(
+      {
+        loggedIn: login,
+        sync: sync
+      })
+  }, [login, sync])
 
 
   // variable to control routing
@@ -67,7 +73,7 @@ const App = () => {
             resumeLink: activeDevData.data.resumeLink,
             active: true
           }
-          // console.log('APP after DB call', developerData)
+          console.log('APP after DB call', developerData)
           // update dev context with current user
           devCtx.updateDev(developerData)
           setupCtx.updateInitialized();
