@@ -1,6 +1,7 @@
 // import axios from "axios";
 import _ from "lodash";
 import React, { useState, useEffect, useContext, Fragment } from "react";
+import Spinner from '../Spinner';
 import { Redirect } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
@@ -54,6 +55,7 @@ const DevTable = () => {
   // })
   let openModal = setupCtx.state.repoModalOpen;
   let isLoggedIn = JSON.parse(localStorage.getItem('jtsy-login'))
+  let loading = JSON.parse(localStorage.getItem('dynamic-sync'))
   // devDataContext variable for re-loading
   let sync = JSON.parse(localStorage.getItem('dynamic-sync'))
   console.log('sync in DEVTABLE', sync)

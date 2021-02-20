@@ -159,6 +159,8 @@ const DevNav = () => {
           devCtx.updateDev(newDevData)
         })
         .catch((err) => console.log(err));
+      localStorage.setItem('dynamic-sync', 'false');
+
     }
     setTimeout(getData, 2000)
   }
@@ -289,12 +291,12 @@ const DevNav = () => {
             border: '1px solid black',
             width: '350px',
             margin: '0 auto',
-            height: '220px'
+            height: '180px'
           }
         }}
       >
         <h1>Re-Sync Repositories</h1>
-        <p>Reload your repositories from GitHub and re-synchronize the app to include any recent changes.</p>
+        <p>Reload your repositories from GitHub and re-synchronize the to include any recent changes.</p>
         <div className="createAccount">
           <Button color="blue" type="submit" onClick={reSync}>Sync</Button>
         </div>

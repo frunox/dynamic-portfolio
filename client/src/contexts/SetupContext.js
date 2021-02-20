@@ -15,6 +15,7 @@ export const SetupProvider = (props) => {
         settingsModalOpen: false,
         syncModalOpen: false,
         sync: false,
+        loading: false,
         lastPage: ""
     });
 
@@ -72,10 +73,17 @@ export const SetupProvider = (props) => {
                         ...state,
                         syncModalOpen: value
                     })
-                }, updateSync: (value) => {
+                },
+                updateSync: (value) => {
                     setState({
                         ...state,
                         sync: value
+                    })
+                },
+                toggleLoading: (value) => {
+                    setState({
+                        ...state,
+                        loading: value
                     })
                 },
 
