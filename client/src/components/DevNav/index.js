@@ -294,7 +294,7 @@ const DevNav = () => {
         }}
       >
         <h1>Re-Sync Repositories</h1>
-        <p>Reload your repositories from GitHub to include any recent changes.</p>
+        <p>Reload your repositories from GitHub and re-synchronize the app to include any recent changes.</p>
         <div className="createAccount">
           <Button color="blue" type="submit" onClick={reSync}>Sync</Button>
         </div>

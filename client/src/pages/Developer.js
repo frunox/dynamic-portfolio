@@ -8,22 +8,9 @@ import LoginModal from '../components/LoginForm/LoginModal'
 import LogoutModal from '../components/LogoutForm/LogoutModal'
 // import SettingsModal from '../components/Settings/SettingsModal'
 
-import SetupContext from '../contexts/SetupContext';
 import "./developer.css";
 
 function Developer() {
-  const setupCtx = useContext(SetupContext)
-  const [, setState] = useState()
-
-  let sync = localStorage.getItem("dynamic-sync");
-  console.log('== Developer sync', sync)
-
-  useEffect(() => {
-    console.log("DEVELOPER useEffect", sync)
-    setState({})
-    localStorage.setItem('dynamic-sync', 'false')
-  }, [sync])
-
   // let isLoggedIn = JSON.parse(localStorage.getItem('jtsy-login'))
 
   return (
