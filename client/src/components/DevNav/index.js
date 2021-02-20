@@ -160,7 +160,7 @@ const DevNav = () => {
         })
         .catch((err) => console.log(err));
     }
-    setTimeout(getData, 20000)
+    setTimeout(getData, 2000)
   }
 
   let content = (
@@ -287,13 +287,14 @@ const DevNav = () => {
             borderRadius: '10px',
             top: '90px',
             border: '1px solid black',
-            width: '500px',
+            width: '350px',
             margin: '0 auto',
-            height: '440px'
+            height: '220px'
           }
         }}
       >
         <h1>Re-Sync Repositories</h1>
+        <p>Reload your repositories from GitHub to include any recent changes.</p>
         <div className="createAccount">
           <Button color="blue" type="submit" onClick={reSync}>Sync</Button>
         </div>
