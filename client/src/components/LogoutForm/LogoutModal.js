@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import Modal from 'react-modal';
-import { Redirect } from "react-router-dom";
+import { Button } from 'semantic-ui-react'
+import { Redirect, useHistory } from "react-router-dom";
 import API from "../../utils/API";
-import { useHistory } from 'react-router-dom';
 import './styles.css'
 
 import DevDataContext from '../../contexts/DevDataContext';
@@ -64,7 +64,7 @@ const LogoutModal = () => {
   };
 
   let content = (
-    <div className='App'>
+    <div className='wrapper'>
       <Modal isOpen={openModal} onRequestClose={() => setupCtx.openLogoutModal(false)}
         // shouldCloseOnOverlayClick={false}
         style={{
@@ -77,13 +77,13 @@ const LogoutModal = () => {
             border: '1px solid black',
             width: '400px',
             margin: '0 auto',
-            height: '275px',
+            height: '255px',
           }
         }}
       >
         <h1>Log Out</h1>
         <div
-          className="createAccount"
+          className="confirmButton"
           onClick={logout}>
           <button type="submit">Confirm</button>
         </div>

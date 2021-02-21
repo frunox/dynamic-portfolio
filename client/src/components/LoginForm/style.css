@@ -1,3 +1,27 @@
-.item {
-  font-size: 1.4rem;
+button {
+  border: 2px solid #fff;
+  width: 100%;
+  padding: 8px 0px;
+  font-size: 1em;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  margin-bottom: 0.25em;
+  border-radius: 5px;
+}
+
+.createAccount button {
+  background-color: teal;
+  color: #fff;
+}
+
+.returnButton button {
+  background-color: #f5d833e3;
+  color: black;
+  margin-top: 1em;
+}
+
+button:hover {
+  color: darkgreen;
+  background-color: #fff;
+  border: 2px solid #519e8a;
 }
