@@ -53,8 +53,17 @@ body {
 
 /* // MODAL */
 
-.modalText {
+.modalHeader {
   text-align: center;
+}
+
+h1 {
+  margin: 0;
+}
+
+p {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .ui.modal {
