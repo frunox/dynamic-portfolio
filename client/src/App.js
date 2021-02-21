@@ -86,7 +86,7 @@ const App = () => {
   // console.log('APP initialized', initialized)
 
   return (
-    <div>
+    <div className='App'>
 
       <React.Fragment>
         <Router>

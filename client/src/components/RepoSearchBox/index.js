@@ -15,6 +15,7 @@ const RepoSearchBox = ({ handleSearchChange, resetRepoSearch }) => {
           onChange={(e) => handleSearchChange(e)}
         />
         <Button
+          as="span"
           type='reset'
           onClick={(e) => resetRepoSearch(e)}
         >

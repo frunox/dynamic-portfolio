@@ -114,8 +114,8 @@ const LoginModal = () => {
             <button type="submit">Log In</button>
           </div>
         </form>
-        <div className="goBack">
-          <button onClick={goBack}>Go Back</button>
+        <div className="returnButton">
+          <button onClick={goBack}>Return</button>
         </div>
       </Modal>
     </div >

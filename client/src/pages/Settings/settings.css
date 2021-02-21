@@ -14,7 +14,6 @@ light green: #A3C4BC
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: teal;
 }
 
 .form-wrapper {
@@ -117,7 +116,6 @@ input.error {
 }
 
 .createAccount button {
-  background-color: teal;
   color: #fff;
   border: 2px solid #fff;
   width: 100%;

@@ -313,11 +313,14 @@ const DevTable = () => {
                 border: '1px solid black',
                 width: '500px',
                 margin: '0 auto',
-                height: '387px'
+                height: '410px'
               }
             }}
           >
-            <h1 className="modalHeader">Update Repository: <span>{state.repoName}</span></h1>
+            <div className='modalHeader'>
+              <h1>Update Repository:</h1>
+              <p>{state.repoName}</p>
+            </div>
             <List as="ul" bulleted inverted className="bList">
               <List.Item as="li">Enter the project description and website in GitHub.</List.Item>
               <List.Item as="li">Image width/height ratio should be 3:2.</List.Item>
