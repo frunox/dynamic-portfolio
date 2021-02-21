@@ -318,8 +318,8 @@ const DevTable = () => {
             }}
           >
             <div className='modalHeader'>
-              <h1>Update Repository:</h1>
-              <p>{state.repoName}</p>
+              <h1 className="repoModalH1">Update Repository:</h1>
+              <p className="repoModalP">{state.repoName}</p>
             </div>
             <List as="ul" bulleted inverted className="bList">
               <List.Item as="li">Enter the project description and website in GitHub.</List.Item>

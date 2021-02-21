@@ -57,11 +57,11 @@ body {
   text-align: center;
 }
 
-h1 {
+.repoModalH1 {
   margin: 0;
 }
 
-p {
+.repoModalP {
   font-size: 1.5rem;
   font-weight: bold;
 }
