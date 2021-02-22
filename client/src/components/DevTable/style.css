@@ -1,7 +1,3 @@
-body {
-  background-color: teal;
-}
-
 .devTable {
   height: 280px;
   overflow-y: scroll; /* or auto */
@@ -57,11 +53,11 @@ body {
   text-align: center;
 }
 
-h1 {
+.modalHeader h1 {
   margin: 0;
 }
 
-p {
+.modalHeader p {
   font-size: 1.5rem;
   font-weight: bold;
 }

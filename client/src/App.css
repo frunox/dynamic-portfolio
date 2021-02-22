@@ -1,10 +1,6 @@
 /* These style affect all components
 The 'body' can be anywhere - it affects /public/index.html
  */
-/* 
-body {
-  background-color: teal;
-} */
 
 .App {
   text-align: center;
