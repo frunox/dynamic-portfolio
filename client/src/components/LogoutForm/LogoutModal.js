@@ -64,7 +64,7 @@ const LogoutModal = () => {
   };
 
   let content = (
-    <div className='wrapper'>
+    <div>
       <Modal isOpen={openModal} onRequestClose={() => setupCtx.openLogoutModal(false)}
         // shouldCloseOnOverlayClick={false}
         style={{
