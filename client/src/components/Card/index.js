@@ -14,7 +14,7 @@ const ProjectCard = props => {
           target='_blank' />
         <Card.Content>
           <Card.Header>{props.repo.repoName}</Card.Header>
-          <Card.Description>{props.repo.repoDesc}</Card.Description>
+          <Card.Description className='cardDescription'>{props.repo.repoDesc}</Card.Description>
         </Card.Content>
         <Card.Content extra>
           <div className='ui two buttons'>
